@@ -25,7 +25,7 @@ Follow these steps to install the configuration on a new system. Ensure you have
      nixosConfigurations = {
      # State Version - NixOS version at the time of installation. Later change only when reinstalling!
      # System - OS architecture. Optional, default: "x86_64-linux"
-     +   host-name = addHost { host = "<host-name>"; stateVersion = "<state-version>"; system = "<arch>"; };
+     +   host-name = addHost { host = "<host-name>"; stateVersion = "<state-version>"; user = <username>; system = "<arch>"; };
      };
      ```
 
