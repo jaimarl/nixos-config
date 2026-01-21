@@ -16,6 +16,7 @@ Follow these steps to install the configuration on a new system. Ensure you have
 
     ```bash
     cp ./hosts/.template ./host/<host-name>
+    git add .
     ```
 
 4. **Register your host in `flake.nix`:**
