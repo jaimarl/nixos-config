@@ -1,6 +1,4 @@
 {
-    services.envfs.enable = true;
-
     services.logind.settings.Login = {
         HandlePowerKey = "ignore";
     };

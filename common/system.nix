@@ -3,7 +3,7 @@
         ../modules/system/bootloader.nix
         ../modules/system/graphics.nix
         ../modules/system/sound.nix
-        ../modules/system/users.nix
+        ../modules/system/shell.nix
 
         ./packages.nix
         ./services.nix

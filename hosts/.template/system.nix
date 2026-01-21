@@ -6,15 +6,10 @@
         ./services.nix
 
         # Modules
-        ../../modules/system/tuigreet.nix
-        ../../modules/system/bluetooth.nix
-        ../../modules/system/wifi.nix
-        ../../modules/system/sound-mono-playback.nix
-        ../../modules/system/zram.nix
-        ../../modules/system/swap.nix
+        # ../../modules/system/tuigreet.nix
     ];
 
-    networking.hostName = "nix-btw";
+    networking.hostName = "nixos";
 
     users.users.${user} = {
         isNormalUser = true;
