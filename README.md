@@ -35,7 +35,7 @@ Follow these steps to install the configuration on a new system. Ensure you have
 5. **Run `install.sh`:**
 
      ```bash
-     ./install.sh <host> <device>
+     ./install.sh <host> [device]
      # E.g. ./install.sh t14-gen2 /dev/nvme0n1
      # If no device specified, system will be installed to the existing /mnt mountpoint
      # This way, you can manually partition and mount drive
