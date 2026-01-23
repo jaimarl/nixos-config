@@ -1,13 +1,14 @@
-{ config, pkgs, stateVersion,... }: {
+{ config, pkgs, stateVersion,... }: let module = ../modules/system; in {
     imports = [
-        ../modules/system/bootloader.nix
-        ../modules/system/graphics.nix
-        ../modules/system/sound.nix
-        ../modules/system/shell.nix
-
         ./packages.nix
         ./services.nix
-    ];
+    ] ++ (map (name: module + "/${name}.nix") [
+        # Modules
+        "bootloader"
+        "graphics"
+        "sound"
+        "shell"
+    ]);
 
     time.timeZone = "Europe/Moscow";
     i18n.defaultLocale = "ru_RU.UTF-8";
@@ -19,6 +20,5 @@
     };
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
     system.stateVersion = stateVersion;
 }

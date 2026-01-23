@@ -1,6 +1,7 @@
 {
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        catppuccin.url = "github:catppuccin/nix";
 
         home-manager = {
             url = "github:nix-community/home-manager";
@@ -8,7 +9,7 @@
         };
     };
 
-    outputs = { nixpkgs, home-manager, ... } @ inputs:
+    outputs = { nixpkgs, catppuccin, home-manager, ... } @ inputs:
         let
             addHost = { host, stateVersion, user, system ? "x86_64-linux" }: nixpkgs.lib.nixosSystem {
                 system = system;
@@ -20,6 +21,7 @@
                     home-manager.users.${user} = { imports = [
                         ./common/home.nix
                         ./hosts/${host}/home.nix
+                        catppuccin.homeModules.catppuccin
                     ];};}
                 ];
             }; 

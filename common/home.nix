@@ -1,8 +1,10 @@
-{ config, pkgs, stateVersion, user, ... }: {
-    imports = [
-        ../modules/home/firefox.nix
-        ../modules/home/git.nix
-    ];
+{ config, pkgs, stateVersion, user, ... }: let module = ../modules/home; in {
+    imports = [] ++ (map (name: module + "/${name}.nix") [
+        # Modules
+        "firefox"
+        "git"
+        "hyprland"
+    ]);
 
     home = {
         username = user;

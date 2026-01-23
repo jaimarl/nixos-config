@@ -1,13 +1,16 @@
-{ config, pkgs, user, ... }: {
+{ config, pkgs, user, ... }: let module = ../../modules/system; in {
     imports = [
         ./.hardware.nix
         ../../common/system.nix
         ./packages.nix
         ./services.nix
+    ] ++ (map (name: module + "/${name}.nix") [
 
-        # Modules
-        # ../../modules/system/tuigreet.nix
-    ];
+    ]);
+
+    disabledModules = [] ++ (map (name: module + "/${name}.nix") [
+
+    ]);
 
     networking.hostName = "nixos";
 

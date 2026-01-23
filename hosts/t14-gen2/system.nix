@@ -1,18 +1,22 @@
-{ config, pkgs, user, ... }: {
+{ config, pkgs, user, ... }: let module = ../../modules/system; in {
     imports = [
         ./.hardware.nix
         ../../common/system.nix
         ./packages.nix
         ./services.nix
-
+    ] ++ (map (name: module + "/${name}.nix") [
         # Modules
-        ../../modules/system/tuigreet.nix
-        ../../modules/system/bluetooth.nix
-        ../../modules/system/wifi.nix
-        ../../modules/system/sound-mono-playback.nix
-        ../../modules/system/zram.nix
-        ../../modules/system/swap.nix
-    ];
+        "tuigreet"
+        "bluetooth"
+        "wifi"
+        "sound-mono-playback"
+        "zram"
+        "swap"
+    ]);
+
+    disabledModules = [] ++ (map (name: module + "/${name}.nix") [
+
+    ]);
 
     networking.hostName = "nix-btw";
 

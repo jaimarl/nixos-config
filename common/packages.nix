@@ -31,9 +31,8 @@
         neovim
             luajitPackages.luarocks_bootstrap
         yazi
-
         hyprland
-        kitty
+
         brightnessctl
     ];
 }

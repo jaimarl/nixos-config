@@ -21,27 +21,19 @@ Follow these steps to install the configuration on a new system. Ensure you have
 
 4. **Register your host in `flake.nix`:**
 
-     ```diff
-     nixosConfigurations = {
-     # State Version - NixOS version at the time of installation. Later change only when reinstalling!
-     # System - OS architecture. Optional, default: "x86_64-linux"
-     +   host-name = addHost { host = "<host-name>"; stateVersion = "<state-version>"; system = "<arch>"; };
-     };
-     ```
-
-5. **Optional. Edit `disko.nix`:**
-
+    ```diff
+    nixosConfigurations = {
+    # State Version - NixOS version at the time of installation. Later change only when reinstalling!
+    # System - OS architecture. Optional, default: "x86_64-linux"
+    +   host-name = addHost { host = "<host-name>"; stateVersion = "<state-version>"; user = "<user>"; system = "<arch>"; };
+    };
     ```
-    Default partitioning:
-    <device>
-    ├─<device>1   1G     /boot
-    └─<device>2   100%   /
+
+6. **Run `install.sh`:**
+
+    ```bash
+    ./install.sh <device> <host>
+    # E.g. ./install.sh /dev/nvme0n1 t14-gen2
     ```
-  
-7. **Run `install.sh`:**
 
-     ```bash
-     ./install.sh <device> <host>
-     # E.g. ./install.sh /dev/nvme0n1 t14-gen2
-
-8. **Done!**
+7. **Done!**
