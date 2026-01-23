@@ -21,27 +21,24 @@ Follow these steps to install the configuration on a new system. Ensure you have
 
 4. **Register your host in `flake.nix`:**
 
-     ```diff
+     ```nix
      nixosConfigurations = {
-     # State Version - NixOS version at the time of installation. Later change only when reinstalling!
-     # System - OS architecture. Optional, default: "x86_64-linux"
-     +   host-name = addHost { host = "<host-name>"; stateVersion = "<state-version>"; user = <username>; system = "<arch>"; };
+         # State Version - NixOS version at the time of installation. Change only when reinstalling!
+         # System - OS architecture. Optional, default: "x86_64-linux"
+         # You MUST separet "=" with spaces, otherwise the installation script will not detect your host!
+         <host-name> = addHost { host = "<host-name>"; stateVersion = "<state-version>"; user = <username>; system = "<arch>"; };
      };
      ```
 
-5. **Optional. Edit `disko.nix`:**
-
-    ```
-    Default partitioning:
-    <device>
-    ├─<device>1   1G     /boot
-    └─<device>2   100%   /
-    ```
+     Optionally, you can add `disko.nix` to your host directory; if present, script will use it. This way, you can configure partitioning separately for each host.
   
-7. **Run `install.sh`:**
+5. **Run `install.sh`:**
 
      ```bash
-     ./install.sh <device> <host>
-     # E.g. ./install.sh /dev/nvme0n1 t14-gen2
+     ./install.sh <host> <device>
+     # E.g. ./install.sh t14-gen2 /dev/nvme0n1
+     # If no device specified, system will be installed to the existing /mnt mountpoint
+     # This way, you can manually partition and mount drive
+     ```
 
-8. **Done!**
+6. **Done!**
