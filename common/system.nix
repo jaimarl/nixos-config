@@ -7,7 +7,8 @@
         "bootloader"
         "graphics"
         "sound"
-        "shell"
+        "aliases"
+        "zsh"
     ]);
 
     time.timeZone = "Europe/Moscow";

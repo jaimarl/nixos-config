@@ -1,8 +1,4 @@
-{ pkgs, host, ... }: {
-    programs.zsh.enable = true;
-    programs.starship.enable = true;
-    users.defaultUserShell = pkgs.zsh;
-
+{ host, ... }: {
     environment.shellAliases = {
         nswitch = "sudo nixos-rebuild switch --flake ~/.nixos/#${host}";
         nboot = "sudo nixos-rebuild boot --flake ~/.nixos/#${host}";
