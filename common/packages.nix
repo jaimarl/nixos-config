@@ -18,6 +18,7 @@
         # CLI Utils
         git
         tree
+        jq
         fzf
         p7zip
         mediainfo

@@ -29,6 +29,7 @@
 
         nixosConfigurations = {
             t14-gen2 = addHost { host = "t14-gen2"; stateVersion = "25.11"; user = "jaimarl"; };
+            t14-gen2 = addHost { host = "t14-gen2"; stateVersion = "25.11"; user = "jadnsak"; };
         };
     };
 }
