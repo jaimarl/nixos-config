@@ -1,4 +1,6 @@
 {
+    services.v2raya.enable = true;
+
     services.logind.settings.Login = {
         HandlePowerKey = "ignore";
     };

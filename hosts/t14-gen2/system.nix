@@ -1,11 +1,9 @@
 { config, pkgs, user, ... }: let module = ../../modules/system; in {
     imports = [
         ./.hardware.nix
-        ../../common/system.nix
-        ./packages.nix
-        ./services.nix
+        ./imports/packages.nix
+        ./imports/services.nix
     ] ++ (map (name: module + "/${name}.nix") [
-        # Modules
         "tuigreet"
         "bluetooth"
         "wifi"

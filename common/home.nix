@@ -1,9 +1,9 @@
 { config, pkgs, stateVersion, user, ... }: let module = ../modules/home; in {
-    imports = [] ++ (map (name: module + "/${name}.nix") [
-        # Modules
+    imports = [
+        ./imports/programs.nix
+    ] ++ (map (name: module + "/${name}.nix") [
         "firefox"
         "git"
-        "hyprland"
     ]);
 
     home = {

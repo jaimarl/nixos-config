@@ -19,21 +19,15 @@
         git
         tree
         jq
-        fzf
         p7zip
         mediainfo
         trash-cli
-        wl-clipboard
+        brightnessctl
         fastfetch
-        bat
 
         # TUI Utils
-        btop
+        # nvtopPackages.full
         neovim
             luajitPackages.luarocks_bootstrap
-        yazi
-        hyprland
-
-        brightnessctl
     ];
 }

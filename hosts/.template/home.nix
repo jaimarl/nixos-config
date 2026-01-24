@@ -1,5 +1,7 @@
 { config, pkgs, stateVersion, user, ... }: let module = ../../modules/home; in {
-    imports = [] ++ (map (name: module + "/${name}.nix") [
+    imports = [
+        ./imports/programs.nix
+    ] ++ (map (name: module + "/${name}.nix") [
 
     ]);
 

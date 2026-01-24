@@ -1,14 +1,15 @@
 { config, pkgs, stateVersion,... }: let module = ../modules/system; in {
     imports = [
-        ./packages.nix
-        ./services.nix
+        ./imports/packages.nix
+        ./imports/services.nix
     ] ++ (map (name: module + "/${name}.nix") [
-        # Modules
         "bootloader"
         "graphics"
         "sound"
         "aliases"
         "zsh"
+
+        "hyprland"
     ]);
 
     time.timeZone = "Europe/Moscow";

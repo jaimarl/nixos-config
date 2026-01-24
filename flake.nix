@@ -15,6 +15,7 @@
                 system = system;
                 specialArgs = { inherit inputs host stateVersion user; };
                 modules = [
+                    ./common/system.nix
                     ./hosts/${host}/system.nix
                     home-manager.nixosModules.home-manager {
                     home-manager.extraSpecialArgs = { inherit host stateVersion user; };
@@ -29,7 +30,6 @@
 
         nixosConfigurations = {
             t14-gen2 = addHost { host = "t14-gen2"; stateVersion = "25.11"; user = "jaimarl"; };
-            t14-gen2 = addHost { host = "t14-gen2"; stateVersion = "25.11"; user = "jadnsak"; };
         };
     };
 }
