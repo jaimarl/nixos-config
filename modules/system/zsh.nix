@@ -4,8 +4,6 @@
     users.defaultUserShell = pkgs.zsh;
 
     home-manager.users.${user} = {
-        programs.fzf = {
-            enableZshIntegration = true;
-        };
+        programs.fzf.enableZshIntegration = true;
     };
 }
