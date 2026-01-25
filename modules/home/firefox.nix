@@ -8,6 +8,7 @@ let mkUrl = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/lates
 
             settings = {
                 "browser.aboutConfig.showWarning" = false;
+                "browser.translations.automaticallyPopup" = false;
                 "browser.urlbar.suggest.calculator" = true;
                 "intl.locale.requested" = "ru";
                 "full-screen-api.warning.timeout" = 0;
