@@ -23,13 +23,13 @@ Follow these steps to install the configuration on a new system. Ensure you have
 
 4. **Register your host in `flake.nix`:**
     
-     State Version: NixOS version at the time of installation. Change only when reinstalling!  
-     System: OS architecture. Optional, default: `"x86_64-linux"`
+     stateVersion - NixOS version at the time of installation. Change only when reinstalling!  
+     system - OS architecture. Optional, default: `"x86_64-linux"`
 
      ```nix
-     nixosConfigurations = {
+     hosts = {
          # You MUST separate "=" with spaces, otherwise the installation script will not detect your host!
-         <host-name> = mkHost { host = "<host-name>"; stateVersion = "<state-version>"; user = <username>; system = "<arch>"; };
+         "<host-name>" = { stateVersion = "<state-version>"; user = <username>; system = "<arch>"; };
      };
      ```
   
@@ -42,4 +42,12 @@ Follow these steps to install the configuration on a new system. Ensure you have
 
      If no device specified, system will be installed to the existing `/mnt` mountpoint. This way, you can manually partition and mount drive.
 
-6. **Done!**
+6. **Set user password:**
+     
+     Login as root using the password you set at the end of installation and set a password for your user.
+
+     ```bash
+     passwd <username>
+     ```
+
+7. **Done!**

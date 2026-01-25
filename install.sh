@@ -25,13 +25,13 @@ if [ ! -d "$CONFIG/hosts/$HOST" ]; then
     exit 1
 fi
 
-if ! grep -q "$HOST = " "$CONFIG/flake.nix"; then
+if ! grep -q "\"$HOST\" = " "$CONFIG/flake.nix"; then
     echo "ERROR: Host \"$HOST\" is not defined in $CONFIG/flake.nix"
     exit 1
 fi
 
 # Get username of host user
-HOST_USER=$(grep -A 1 "$HOST = " "$CONFIG/flake.nix" | grep "user = " | sed -E 's/.*user = "([^"]+)".*/\1/')
+HOST_USER=$(grep -A 1 "\"$HOST\" = " "$CONFIG/flake.nix" | grep "user = " | sed -E 's/.*user = "([^"]+)".*/\1/')
 if [ -z "$HOST_USER" ]; then
     echo "ERROR: Unable to get user for host \"$HOST\" in $CONFIG/flake.nix"
     exit 1
@@ -57,7 +57,8 @@ if [ -n "$DEVICE" ]; then
         echo -e "\nInstallation canceled by user"
         exit 1
     fi
-        
+    SECONDS=0
+
     echo -e "\nPartitioning Drive..."
     sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko "$DISKO_CONFIG" --argstr device "$DEVICE"
 else
@@ -67,6 +68,7 @@ else
         echo -e "\nInstallation canceled by user"
         exit 1
     fi
+    SECONDS=0
 fi
 
 
@@ -90,3 +92,5 @@ sudo nixos-install --flake "$CONFIG"/#"$HOST"
 
 # Copy config to /home
 sudo cp -ra "$CONFIG" "$HOME"/.nixos
+
+echo "Time elapsed: $(($SECONDS / 60))h, $(($SECONDS %3600 / 60))m, $(($SECONDS % 60))s"
