@@ -10,6 +10,7 @@
         "sound-mono-playback"
         "zram"
         "swap"
+        "gaming"
     ]);
 
     disabledModules = [] ++ (map (name: module + "/${name}.nix") [

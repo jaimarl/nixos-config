@@ -10,5 +10,12 @@
         username = user;
         homeDirectory = "/home/${user}";
         stateVersion = stateVersion;
+        activation.installSoftware = ''
+            if [ ! -d ~/.software ]; then
+                echo "Installing software..."
+                ${pkgs.git}/bin/git clone https://github.com/jaimarl/software ~/.software
+                ~/.software/install.sh nvim yazi zsh
+            fi
+        '';
     };
 }

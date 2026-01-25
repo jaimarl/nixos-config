@@ -6,6 +6,7 @@
         "bootloader"
         "graphics"
         "sound"
+        "nopass-power"
         "aliases"
         "zsh"
 

@@ -24,7 +24,7 @@
         trash-cli
         brightnessctl
         fastfetch
-
+        
         # TUI Utils
         # nvtopPackages.full
         neovim

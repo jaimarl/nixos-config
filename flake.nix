@@ -11,7 +11,7 @@
 
     outputs = { nixpkgs, catppuccin, home-manager, ... } @ inputs:
         let
-            addHost = { host, stateVersion, user, system ? "x86_64-linux" }: nixpkgs.lib.nixosSystem {
+            mkHost = { host, stateVersion, user, system ? "x86_64-linux" }: nixpkgs.lib.nixosSystem {
                 system = system;
                 specialArgs = { inherit inputs host stateVersion user; };
                 modules = [
@@ -29,7 +29,7 @@
         in {
 
         nixosConfigurations = {
-            t14-gen2 = addHost { host = "t14-gen2"; stateVersion = "25.11"; user = "jaimarl"; };
+            t14-gen2 = mkHost { host = "t14-gen2"; stateVersion = "25.11"; user = "jaimarl"; };
         };
     };
 }
