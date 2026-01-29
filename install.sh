@@ -93,4 +93,4 @@ sudo nixos-install --flake "$CONFIG"/#"$HOST"
 # Copy config to /home
 sudo cp -ra "$CONFIG" "$HOME"/.nixos
 
-echo "Time elapsed: $(($SECONDS / 60))h, $(($SECONDS %3600 / 60))m, $(($SECONDS % 60))s"
+echo "Time elapsed: $(($SECONDS / 3600))h, $(($SECONDS %3600 / 60))m, $(($SECONDS % 60))s"
