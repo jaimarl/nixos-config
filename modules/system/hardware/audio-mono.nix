@@ -1,4 +1,8 @@
-{
+{ config, lib, ... }: {
+options.modules.system.hardware.audioMono.enable = lib.mkEnableOption "Mono Audio Playback";
+
+config = lib.mkIf config.modules.system.hardware.audioMono.enable {
+
     services.pipewire.extraConfig.pipewire."99-mono-output" = {
         "context.modules" = [{
             name = "libpipewire-module-loopback";
@@ -17,4 +21,5 @@
             };
         }];
     };
-}
+
+};}

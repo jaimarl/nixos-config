@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
+options.modules.system.boot.tuigreet.enable = lib.mkEnableOption "Tuigreet";
+
+config = lib.mkIf config.modules.system.boot.tuigreet.enable {
+
     environment.systemPackages = with pkgs; [
         greetd
         tuigreet
@@ -23,4 +27,5 @@
         TTYVHangup = true;
         TTYVTDisallocate = true;
     };
-}
+
+};}

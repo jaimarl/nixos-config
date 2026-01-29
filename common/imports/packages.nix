@@ -19,14 +19,10 @@
         git
         tree
         jq
-        p7zip
-        mediainfo
-        trash-cli
         brightnessctl
         fastfetch
         
         # TUI Utils
-        # nvtopPackages.full
         neovim
             luajitPackages.luarocks_bootstrap
     ];

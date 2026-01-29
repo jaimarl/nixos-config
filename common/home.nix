@@ -1,21 +1,24 @@
-{ config, pkgs, stateVersion, user, ... }: let module = ../modules/home; in {
+{ config, lib, pkgs, stateVersion, user, ... }: let enabledModules = {
+    modules.home = {
+        # Enable Modules
+        catppuccin.enable = true;
+        firefox.enable = true;
+        git.enable = true;
+    };}; in {
+
     imports = [
         ./imports/programs.nix
-    ] ++ (map (name: module + "/${name}.nix") [
-        "firefox"
-        "git"
-    ]);
+        ../modules/home/.imports.nix
+    ];
 
+config = enabledModules // {
+
+    # Options
+
+#--------------------------------------------------------------------
     home = {
         username = user;
         homeDirectory = "/home/${user}";
         stateVersion = stateVersion;
-        activation.installSoftware = ''
-            if [ ! -d ~/.software ]; then
-                echo "Installing software..."
-                ${pkgs.git}/bin/git clone https://github.com/jaimarl/software ~/.software
-                ~/.software/install.sh nvim yazi zsh
-            fi
-        '';
     };
-}
+};}

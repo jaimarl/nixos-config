@@ -1,13 +1,17 @@
-{ osConfig, lib, pkgs, ... }: let
+{ config, osConfig, lib, pkgs, ... }: let
     flavor = "mocha";
     accent = "mauve";
 in {
+options.modules.home.catppuccin.enable = lib.mkEnableOption "Catppuccin Theme";
+
+config = lib.mkIf config.modules.home.catppuccin.enable {
+
     catppuccin.enable = true;
     catppuccin.flavor = flavor;
     catppuccin.accent = accent;
     
     # Steam
-    home = lib.mkIf osConfig.programs.steam.enable ( let
+    home = lib.mkIf osConfig.modules.system.gaming.enable ( let
         theme = if flavor == "latte" then "frappe" else flavor;
     in {
         packages = [ pkgs.adwsteamgtk ];
@@ -20,4 +24,5 @@ in {
         "ui.systemUsesDarkTheme" = if flavor == "latte" then 0 else 1;
         "layout.css.prefers-color-scheme.content-override" = if flavor == "latte" then 1 else 0;
     };
-}
+
+};}

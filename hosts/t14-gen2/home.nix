@@ -1,17 +1,28 @@
-{ config, pkgs, stateVersion, user, ... }: let module = ../../modules/home; in {
+{ config, lib, pkgs, stateVersion, user, ... }: let enabledModules = {
+    modules.home = {
+        # Enable Modules
+        hyprland.enable = true;
+    };}; in {
+
     imports = [
         ./imports/programs.nix
-    ] ++ (map (name: module + "/${name}.nix") [
-        "catppuccin"
-    ]);
+    ];
+    
+config = enabledModules // {
 
-    disabledModules = [] ++ (map (name: module + "/${name}.nix") [
+    # Hyprland
+    wayland.windowManager.hyprland = {
+        settings = {
+            monitor = [
+                "eDP-1, 1920x1080, 0x0, 1"
+            ];
+        };
+    };
 
-    ]);
-
+#--------------------------------------------------------------------
     home = {
         username = user;
         homeDirectory = "/home/${user}";
         stateVersion = stateVersion;
     };
-}
+};}

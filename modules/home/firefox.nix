@@ -1,4 +1,9 @@
+{ config, lib, ... }:
 let mkUrl = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi"; in {
+options.modules.home.firefox.enable = lib.mkEnableOption "Firefox Browser";
+
+config = lib.mkIf config.modules.home.firefox.enable {
+
     programs.firefox = {
         enable = true;
 
@@ -97,4 +102,5 @@ let mkUrl = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/lates
             };
         };
     };
-}
+
+};}
