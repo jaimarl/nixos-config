@@ -1,5 +1,4 @@
 { config, lib, ... }: {
-config = lib.mkIf config.modules.home.hyprland.enable {
 
     wayland.windowManager.hyprland.settings = {
         input = {
@@ -12,4 +11,4 @@ config = lib.mkIf config.modules.home.hyprland.enable {
         };
     };
 
-};}
+}

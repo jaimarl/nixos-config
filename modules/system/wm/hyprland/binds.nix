@@ -1,5 +1,4 @@
 { config, lib, ... }: {
-config = lib.mkIf config.modules.home.hyprland.enable {
 
     wayland.windowManager.hyprland.settings.bind = let
         zshRun = cmd: "zsh -ic '${cmd}; exec zsh'";
@@ -15,9 +14,6 @@ config = lib.mkIf config.modules.home.hyprland.enable {
         "Super, Equal, exec, pypr zoom ++1"
         "Super, Minus, exec, pypr zoom --1"
         "Super, 0, exec, pypr zoom 1.0"
-
-        ", XF86MonBrightnessUp, exec, brightnessctl s 5%+"
-        ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
 
         # Windows Management
         "Super, Q, killactive"
@@ -60,4 +56,4 @@ config = lib.mkIf config.modules.home.hyprland.enable {
 
     ];
 
-};}
+}

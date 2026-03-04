@@ -1,17 +1,17 @@
-{ config, lib, pkgs, stateVersion, user, ... }: let enabledModules = {
+{ config, osConfig, lib, pkgs, stateVersion, user, ... }: let enabledModules = {
     modules.home = {
         # Enable Modules
-        catppuccin.enable = true;
+        stylix.enable = true;
         firefox.enable = true;
         git.enable = true;
     };}; in {
 
     imports = [
-        ./imports/programs.nix
+        ./imports/packages-home.nix
         ../modules/home/.imports.nix
     ];
 
-config = enabledModules // {
+config = lib.recursiveUpdate enabledModules {
 
     # Options
 

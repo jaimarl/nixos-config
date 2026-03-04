@@ -1,4 +1,4 @@
-{ config, lib, pkgs, user, ... }: let enabledModules = {
+{ config, hmConfig, lib, pkgs, user, ... }: let enabledModules = {
     modules.system = {
         # Enable Modules
         hardware.bluetooth.enable = true;
@@ -6,19 +6,22 @@
         hardware.audioMono.enable = true;
         boot.swap.enable = true;
         boot.zram.enable = true;
+        wm.hyprland.enable = true;
         gaming.enable = true;
     };}; in {
 
     imports = [
         ./.hardware.nix
-        ./imports/packages.nix
+        ./imports/packages-system.nix
         ./imports/services.nix
     ];
 
-config = enabledModules // {
+config = lib.recursiveUpdate enabledModules {
 
     # Hostname
     networking.hostName = "nix-btw";
+
+    modules.system.wm.hyprland.monitors = [ "eDP-1, 1920x1080@60, 0x0, 1" ];
 
 #--------------------------------------------------------------------
     users.users.${user} = {

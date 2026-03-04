@@ -1,5 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{ config, hmConfig, lib, pkgs, ... }: {
 options.modules.system.boot.tuigreet.enable = lib.mkEnableOption "Tuigreet";
+
+options.modules.system.boot.tuigreet = {
+    cmd = lib.mkOption { type = lib.types.str; default = config.common.system.shell; };
+};
 
 config = lib.mkIf config.modules.system.boot.tuigreet.enable {
 
@@ -8,21 +12,23 @@ config = lib.mkIf config.modules.system.boot.tuigreet.enable {
         tuigreet
     ];
 
-    services.greetd = {
+    services.greetd = let
+        cmd = config.modules.system.boot.tuigreet.cmd;
+    in {
         enable = true;
         settings = {
-          default_session = {
-            command = "${pkgs.tuigreet}/bin/tuigreet -r --time --time-format '%A, %d %B - %H:%M' --window-padding 1 --cmd start-hyprland";
-            user = "greeter";
-          };
+            default_session = {
+                command = "${pkgs.tuigreet}/bin/tuigreet -r --time --time-format '%A, %d %B - %H:%M' --window-padding 1 --cmd ${cmd}";
+                user = "greeter";
+            };
         };
     };
 
     systemd.services.greetd.serviceConfig = {
         Type = "idle";
-        StandartInput = "tty";
-        StandartOutput = "tty";
-        StandartError = "journal";
+        StandardInput = "tty";
+        StandardOutput = "tty";
+        StandardError = "journal";
         TTYReset = true;
         TTYVHangup = true;
         TTYVTDisallocate = true;

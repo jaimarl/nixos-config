@@ -1,22 +1,27 @@
-{ config, lib, pkgs, stateVersion, user, ... }: let enabledModules = {
+{ config, osConfig, lib, pkgs, stateVersion, user, ... }: let enabledModules = {
     modules.home = {
         # Enable Modules
-        hyprland.enable = true;
     };}; in {
 
     imports = [
-        ./imports/programs.nix
+        ./imports/packages-home.nix
     ];
     
-config = enabledModules // {
+config = lib.recursiveUpdate enabledModules {
+    
+    # Options
+    wayland.windowManager.hyprland.settings = {
+        bind = [
+            ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ];
+        binde = [
+            ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
+            ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 2%+"
 
-    # Hyprland
-    wayland.windowManager.hyprland = {
-        settings = {
-            monitor = [
-                "eDP-1, 1920x1080, 0x0, 1"
-            ];
-        };
+            ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
+            ", XF86MonBrightnessUp, exec, brightnessctl s 5%+"
+        ];
     };
 
 #--------------------------------------------------------------------

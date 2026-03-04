@@ -7,16 +7,16 @@
         hardware.audio.enable = true;
         shell.aliases.enable = true;
         shell.zsh.enable = true;
-        polkit.enable = true;
+        polkitRules.enable = true;
     };}; in {
 
     imports = [
-        ./imports/packages.nix
+        ./imports/packages-system.nix
         ./imports/services.nix
         ../modules/system/.imports.nix
     ];
 
-config = enabledModules // {
+config = lib.recursiveUpdate enabledModules {
 
     # Localization
     time.timeZone = "Europe/Moscow";
@@ -27,8 +27,6 @@ config = enabledModules // {
         earlySetup = true;
         packages = [ pkgs.terminus_font ];
     };
-
-    programs.hyprland.enable = hmConfig.modules.home.hyprland.enable;
 
 #--------------------------------------------------------------------
     _module.args.hmConfig = config.home-manager.users.${user};

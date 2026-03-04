@@ -1,5 +1,8 @@
 { config, lib, ... }: {
-config = lib.mkIf config.modules.home.hyprland.enable {
+    
+    wayland.windowManager.hyprland.settings.exec-once = [
+        "pypr"
+    ];
 
     xdg.configFile."hypr/pyprland.toml".text = ''
         [pyprland]
@@ -8,4 +11,4 @@ config = lib.mkIf config.modules.home.hyprland.enable {
         ]
     '';
 
-};}
+}

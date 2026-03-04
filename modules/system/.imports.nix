@@ -15,7 +15,9 @@
         ./shell/aliases.nix
         ./shell/zsh.nix
 
-        ./polkit.nix
+        ./wm/hyprland
+
+        ./polkit-rules.nix
         ./virtualisation.nix
         ./gaming.nix
     ];

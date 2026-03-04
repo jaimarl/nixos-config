@@ -1,0 +1,9 @@
+{ config, lib, pkgs, ... }: {
+
+    wayland.windowManager.hyprland.settings.exec-once = [
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+        "swww-daemon"
+        "hyprland-per-window-layout"
+    ];
+
+}
