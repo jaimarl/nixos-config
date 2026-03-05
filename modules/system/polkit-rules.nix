@@ -1,7 +1,15 @@
-{ config, lib, pkgs, ... }: {
-options.modules.system.polkitRules.enable = lib.mkEnableOption "Polkit Configuration";
+{ config, lib, pkgs, ... }: let
+    option = config.modules.system.polkitRules;
+in {
 
-config = lib.mkIf config.modules.system.polkitRules.enable {
+#--- [ Options ] ---------------------------------------------------- 
+options.modules.system.polkitRules = {
+    enable = lib.mkEnableOption "Polkit Configuration";
+};
+
+
+#--- [ Config ] -----------------------------------------------------
+config = lib.mkIf option.enable {
 
     security.polkit.extraConfig = ''
         if (( action.id == "org.freedesktop.login1.reboot" || \

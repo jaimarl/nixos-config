@@ -1,7 +1,15 @@
-{ config, lib, ... }: {
-options.modules.system.boot.zram.enable = lib.mkEnableOption "zRam";
+{ config, lib, ... }: let
+    option = config.modules.system.boot.zram;
+in {
 
-config = lib.mkIf config.modules.system.boot.zram.enable {
+#--- [ Options ] ---------------------------------------------------- 
+options.modules.system.boot.zram = {
+    enable = lib.mkEnableOption "zRam";
+};
+
+
+#--- [ Config ] -----------------------------------------------------
+config = lib.mkIf option.enable {
 
     zramSwap = {
         enable = true;

@@ -1,6 +1,9 @@
-{ config, osConfig, lib, ... }: {
+{ config, osConfig, lib, ... }: let
+    option = osConfig.modules.system.wm.hyprland;
+in {
 
-config = lib.mkIf osConfig.modules.system.wm.hyprland.enable {
+#--- [ Config ] -----------------------------------------------------
+config = {
 
     wayland.windowManager.hyprland.settings.exec-once = [
         "waybar"

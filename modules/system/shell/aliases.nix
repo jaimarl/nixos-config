@@ -1,7 +1,15 @@
-{ config, hmConfig, lib, pkgs, host, user, ... }: {
-options.modules.system.shell.aliases.enable = lib.mkEnableOption "Global Aliases";
+{ config, hmConfig, lib, pkgs, host, user, ... }: let
+    option = config.modules.system.shell.aliases;
+in {
 
-config = lib.mkIf config.modules.system.shell.aliases.enable {
+#--- [ Options ] ----------------------------------------------------
+options.modules.system.shell.aliases = {
+    enable = lib.mkEnableOption "Global Aliases";
+};
+
+
+#--- [ Config ] -----------------------------------------------------
+config = lib.mkIf option.enable {
 
     environment.shellAliases = {
         nswitch = "sudo nixos-rebuild switch --flake ~/.nixos/#${host}";

@@ -1,7 +1,21 @@
-{ config, lib, inputs, pkgs, ... }: {
-options.modules.home.stylix.enable = lib.mkEnableOption "Stylix Theming";
+{ config, lib, inputs, pkgs, ... }: let
+    option = config.modules.home.stylix;
+in {
 
-config = lib.mkIf config.modules.home.stylix.enable {
+#--- [ Options ] ----------------------------------------------------
+options.modules.home.stylix = {
+    enable = lib.mkEnableOption "Stylix Theming";
+
+    theme = lib.mkOption { type = lib.types.str; default = "catppuccin-mocha"; };
+    cursor = {
+        package = lib.mkOption { type = lib.types.package; default = pkgs.capitaine-cursors-themed; };
+        name = lib.mkOption { type = lib.types.str; default = "Capitaine Cursors"; };
+    };
+};
+
+
+#--- [ Config ] -----------------------------------------------------
+config = lib.mkIf option.enable {
 
     fonts.fontconfig.enable = true;
 
@@ -14,11 +28,11 @@ config = lib.mkIf config.modules.home.stylix.enable {
 
     stylix = {
         enable = true;
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/${option.theme}.yaml";
 
         cursor = {
-            package = pkgs.capitaine-cursors-themed;
-            name = "Capitaine Cursors (Gruvbox)";
+            package = option.cursor.package;
+            name = option.cursor.name;
             size = 24;
         };
 

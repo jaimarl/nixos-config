@@ -3,7 +3,7 @@
         # Enable Modules
         hardware.bluetooth.enable = true;
         hardware.wifi.enable = true;
-        hardware.audioMono.enable = true;
+        hardware.audio.monoPlayback = true;
         boot.swap.enable = true;
         boot.zram.enable = true;
         wm.hyprland.enable = true;

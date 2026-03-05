@@ -1,12 +1,18 @@
-{ config, lib, pkgs, user, ... }: {
-options.modules.system.wm.hyprland.enable = lib.mkEnableOption "Hyprland WM";
+{ config, osConfig, lib, pkgs, user, ... }: let
+    option = config.modules.system.wm.hyprland;
+in {
 
+#--- [ Options ] ----------------------------------------------------
 options.modules.system.wm.hyprland = {
+    enable = lib.mkEnableOption "Hyprland WM";
+
     monitors = lib.mkOption { type = lib.types.listOf lib.types.str; default = []; };
     opacity = lib.mkOption { type = lib.types.bool; default = true; };
 };
 
-config = lib.mkIf config.modules.system.wm.hyprland.enable {
+
+#--- [ Config ]------------------------------------------------------
+config = lib.mkIf option.enable {
 
     programs.hyprland.enable = true;
     modules.system.boot.tuigreet.cmd = "start-hyprland";
@@ -36,11 +42,9 @@ home-manager.users.${user} = {
     wayland.windowManager.hyprland = {
         enable = true;
         settings = {
-            monitor = config.modules.system.wm.hyprland.monitors;
+            monitor = option.monitors;
         };
     };
-
-    modules.home.kitty.enable = true;
 
     modules.home.firefox.hideNavigation = true;
 

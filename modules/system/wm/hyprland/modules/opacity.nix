@@ -1,6 +1,9 @@
-{ osConfig, lib, ... }: {
+{ config, osConfig, lib, ... }: let
+    option = osConfig.modules.system.wm.hyprland;
+in {
 
-config = lib.mkIf osConfig.modules.system.wm.hyprland.opacity {
+#--- [ Config ] -----------------------------------------------------
+config = lib.mkIf option.opacity {
     
     wayland.windowManager.hyprland.settings = {
         windowrule = [

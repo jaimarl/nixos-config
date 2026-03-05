@@ -1,7 +1,15 @@
-{ config, lib, pkgs, ... }: {
-options.modules.system.hardware.wifi.enable = lib.mkEnableOption "WiFi";
+{ config, lib, pkgs, ... }: let
+    option = config.modules.system.hardware.wifi;
+in {
 
-config = lib.mkIf config.modules.system.hardware.wifi.enable {
+#--- [ Options ] ---------------------------------------------------- 
+options.modules.system.hardware.wifi = {
+    enable = lib.mkEnableOption "WiFi";
+};
+
+
+#--- [ Config ] -----------------------------------------------------
+config = lib.mkIf option.enable {
 
     environment.systemPackages = with pkgs; [
         impala

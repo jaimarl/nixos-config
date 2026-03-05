@@ -1,7 +1,15 @@
-{ config, lib, pkgs, user, ... }: {
-options.modules.system.virtualisation.enable = lib.mkEnableOption "Virtualisation";
+{ config, lib, pkgs, user, ... }: let
+    option = config.modules.system.virtualisation;
+in {
 
-config = lib.mkIf config.modules.system.virtualisation.enable {
+#--- [ Options ] ---------------------------------------------------- 
+options.modules.system.virtualisation = {
+    enable = lib.mkEnableOption "Virtualisation";
+};
+
+
+#--- [ Config ] -----------------------------------------------------
+config = lib.mkIf option.enable {
 
     environment.systemPackages = with pkgs; [
         spice-protocol

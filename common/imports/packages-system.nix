@@ -16,8 +16,13 @@
         fastfetch
         brightnessctl
         
-        # TUI Utils
-        neovim luajitPackages.luarocks_bootstrap tree-sitter gcc lua-language-server marksman
+        # Neovim
+        neovim
+        luajitPackages.luarocks_bootstrap
+        tree-sitter
+        gcc
+        lua-language-server
+        marksman
     ];
 
     programs = {

@@ -6,9 +6,7 @@
         ./boot/zram.nix
 
         ./hardware/audio.nix
-        ./hardware/audio-mono.nix
         ./hardware/graphics.nix
-        ./hardware/graphics-nvidia.nix
         ./hardware/bluetooth.nix
         ./hardware/wifi.nix
 

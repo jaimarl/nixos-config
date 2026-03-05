@@ -1,13 +1,18 @@
-{ config, lib, ... }: {
+{ config, osConfig, lib, ... }: let
+    option = osConfig.modules.system.wm.hyprland;
+in {
+
+#--- [ Config ] -----------------------------------------------------
+config = {
 
     wayland.windowManager.hyprland.settings.bind = let
+        terminal = config.global.home.terminal;
         zshRun = cmd: "zsh -ic '${cmd}; exec zsh'";
-        editor = "kitty nvim";
     in [
         # Programs
-        "Super, Return, exec, kitty"
-        "Super, E, exec, kitty ${zshRun "y"}"
-        "Super, Grave, exec, ${editor}"
+        "Super, Return, exec, ${terminal}"
+        "Super, E, exec, ${terminal} ${zshRun "y"}"
+        "Super, Grave, exec, ${terminal} nvim"
         "Super, B, exec, firefox"
 
         # Screen
@@ -56,4 +61,4 @@
 
     ];
 
-}
+};}

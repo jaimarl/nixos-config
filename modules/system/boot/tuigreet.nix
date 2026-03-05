@@ -1,11 +1,19 @@
-{ config, hmConfig, lib, pkgs, ... }: {
-options.modules.system.boot.tuigreet.enable = lib.mkEnableOption "Tuigreet";
+{ config, hmConfig, lib, pkgs, ... }: let
+    option = config.modules.system.boot.tuigreet;
+in {
 
+#--- [ Options ] ---------------------------------------------------- 
+options.modules.system.boot.tuigreet = {
+    enable = lib.mkEnableOption "Tuigreet";
+};
+
+
+#--- [ Config ] -----------------------------------------------------
 options.modules.system.boot.tuigreet = {
     cmd = lib.mkOption { type = lib.types.str; default = config.common.system.shell; };
 };
 
-config = lib.mkIf config.modules.system.boot.tuigreet.enable {
+config = lib.mkIf option.enable {
 
     environment.systemPackages = with pkgs; [
         greetd

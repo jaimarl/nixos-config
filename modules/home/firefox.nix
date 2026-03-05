@@ -1,12 +1,18 @@
-{ config, lib, ... }:
-let mkUrl = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi"; in {
-options.modules.home.firefox.enable = lib.mkEnableOption "Firefox Browser";
+{ config, lib, ... }: let 
+    option = config.modules.home.firefox;
+    mkUrl = id: "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
+in {
 
+#--- [ Options ] ----------------------------------------------------
 options.modules.home.firefox = {
+    enable = lib.mkEnableOption "Firefox Browser";
+
     hideNavigation = lib.mkEnableOption "Hide Navigation Buttons";
 };
 
-config = lib.mkIf config.modules.home.firefox.enable {
+
+#--- [ Config ] -----------------------------------------------------
+config = lib.mkIf option.enable {
 
     programs.firefox = {
         enable = true;
@@ -25,7 +31,7 @@ config = lib.mkIf config.modules.home.firefox.enable {
                 "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
             };
 
-            userChrome = lib.mkIf config.modules.home.firefox.hideNavigation ''
+            userChrome = lib.mkIf option.hideNavigation ''
                 .titlebar-buttonbox-container{ display:none !important }
                 .titlebar-spacer { display: none !important }
             '';

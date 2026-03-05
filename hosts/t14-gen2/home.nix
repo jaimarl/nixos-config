@@ -1,6 +1,7 @@
 { config, osConfig, lib, pkgs, stateVersion, user, ... }: let enabledModules = {
     modules.home = {
         # Enable Modules
+        kitty.enable = true;
     };}; in {
 
     imports = [

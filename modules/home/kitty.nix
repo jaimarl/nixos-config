@@ -1,7 +1,17 @@
-{ config, lib, ... }: {
-options.modules.home.kitty.enable = lib.mkEnableOption "Kitty Terminal";
+{ config, lib, ... }: let
+    option = config.modules.home.kitty;
+in {
 
-config = lib.mkIf config.modules.home.kitty.enable {
+#--- [ Options ] ----------------------------------------------------
+options.modules.home.kitty = {
+    enable = lib.mkEnableOption "Kitty Terminal";
+};
+
+
+#--- [ Config ] -----------------------------------------------------
+config = lib.mkIf option.enable {
+
+    global.home.terminal = "kitty";
 
     programs.kitty = {
         enable = true;
