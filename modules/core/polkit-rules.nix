@@ -1,17 +1,17 @@
 { config, lib, pkgs, ... }: let
-    option = config.modules.system.polkitRules;
+    option = config.modules.core.polkitRules;
 in {
 
 #--- [ Options ] ---------------------------------------------------- 
-options.modules.system.polkitRules = {
-    enable = lib.mkEnableOption "Polkit Configuration";
+options.modules.core.polkitRules = {
+    power.enable = lib.mkOption { type = lib.types.bool; default = true; };
 };
 
 
 #--- [ Config ] -----------------------------------------------------
-config = lib.mkIf option.enable {
+config = {
 
-    security.polkit.extraConfig = ''
+    security.polkit.extraConfig = lib.mkIf option.power.enable ''
         if (( action.id == "org.freedesktop.login1.reboot" || \
             action.id == "org.freedesktop.login1.reboot-multiple-sessions" || \
             action.id == "org.freedesktop.login1.power-off" || \

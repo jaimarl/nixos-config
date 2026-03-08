@@ -1,0 +1,158 @@
+* {
+    font-weight: 400;  
+}
+
+/* Icons */
+#network.icon,
+#clock.cal-icon,
+#clock.icon,
+#language.icon,
+#backlight.icon,
+#pulseaudio.mic,
+#pulseaudio.icon,
+#battery.icon {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-right: 0px;
+    padding-left: 10px;
+    padding-right: 5px;
+    padding-top: 1px;
+    font-size: 12pt;
+    color: @base0D;
+    background: @base01;
+}
+
+/* Text */
+#network.text,
+#clock.cal-text,
+#clock.text,
+#language.text,
+#backlight.text,
+#pulseaudio.text,
+#battery.text {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 5px;
+    padding-right: 10px;
+    padding-top: 1px;
+    color: @base04;
+    background: @base01;
+}
+
+
+/* Left Modules */
+#custom-nix {
+    margin: 4px;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 18px;
+    color: @base0D;
+}
+
+#workspaces {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 7px;
+    border-radius: 7px;
+    color: @base04;
+    background: @base01;
+}
+#workspaces button {
+    padding: 0px;
+    padding-top: 1px;
+    min-width: 26px;
+    border-radius: 0px;
+    color: @base0D;
+}
+#workspaces button.empty {
+    color: @base04;
+}
+#workspaces button.visible {
+    padding-bottom: 0px;
+    color: @base0D;
+    border-bottom: 2px solid @base0D;
+}
+#workspaces button.urgent {
+    color: @base08;
+}
+#workspaces button:hover {
+    box-shadow: none;
+    text-shadow: none;
+}
+
+
+/* Center Modules */
+#clock.cal-icon,
+#clock.icon {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#clock.cal-text {
+    margin-right: 5px;
+}
+#clock.text {
+    min-width: 39px;
+}
+#clock.cal-text,
+#clock.text {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+/* Right Modules */
+#network.icon {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#network.icon.disconnected {
+    color: @base08;
+}
+
+#language.text {
+    min-width: 19px;
+}
+
+#backlight.text {
+    min-width: 37px;
+}
+
+#pulseaudio.mic.source-muted,
+#pulseaudio.icon.muted {
+    color: @base08;
+}
+#pulseaudio.mic {
+    min-width: 14px;
+}
+#pulseaudio.icon {
+    padding-left: 0px;
+}
+#pulseaudio.text {
+    min-width: 37px;
+}
+
+#battery.icon.warning {
+    color: @base0A;
+}
+#battery.icon.critical {
+    color: @base08;
+}
+#battery.icon.charging {
+    color: @base0B;
+}
+#battery.text {
+    min-width: 37px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#custom-power {
+    margin: 3px;
+    margin-left: 15px;
+    margin-right: 16px;
+    font-size: 18px;
+    color: @base0D;
+}

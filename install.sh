@@ -82,8 +82,8 @@ fi
 # Generate hardware configuration
 echo -e "\nGenerating hardware configuration..."
 sudo nixos-generate-config --root /mnt
-sudo rm -rf "$CONFIG"/hosts/"$HOST"/.hardware.nix
-sudo mv /mnt/etc/nixos/hardware-configuration.nix "$CONFIG"/hosts/"$HOST"/.hardware.nix
+sudo rm -rf "$CONFIG"/hosts/"$HOST"/hardware.nix
+sudo mv /mnt/etc/nixos/hardware-configuration.nix "$CONFIG"/hosts/"$HOST"/hardware.nix
 sudo rm -rf /mnt/etc/nixos
 
 # Install NixOS

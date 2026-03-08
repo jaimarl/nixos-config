@@ -5,14 +5,12 @@ in {
 #--- [ Options ] ---------------------------------------------------- 
 options.modules.system.boot.tuigreet = {
     enable = lib.mkEnableOption "Tuigreet";
+
+    cmd = lib.mkOption { type = lib.types.str; default = config.global.system.shell; };
 };
 
 
 #--- [ Config ] -----------------------------------------------------
-options.modules.system.boot.tuigreet = {
-    cmd = lib.mkOption { type = lib.types.str; default = config.common.system.shell; };
-};
-
 config = lib.mkIf option.enable {
 
     environment.systemPackages = with pkgs; [

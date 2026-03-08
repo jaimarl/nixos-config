@@ -1,11 +1,19 @@
-{ pkgs, ... }: {
+{ pkgs, stable, ... }: {
 
     home.packages = with pkgs; [
         # CLI Utils
         p7zip
         mediainfo
         trash-cli
-        gowall
+
+        # Neovim
+        neovim
+        luajitPackages.luarocks_bootstrap
+        tree-sitter
+        gcc
+        lua-language-server
+        vscode-langservers-extracted
+        marksman
     ];
 
     programs = {

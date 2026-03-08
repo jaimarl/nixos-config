@@ -1,17 +1,16 @@
 { config, lib, ... }: let
-    option = config.modules.system.hardware.graphics;
+    option = config.modules.core.graphics;
 in {
 
 #--- [ Options ] ----------------------------------------------------
-options.modules.system.hardware.graphics = {
-    enable = lib.mkEnableOption "Graphics";
-
-    nvidia = lib.mkEnableOption "Nvidia Drivers";
+options.modules.core.graphics = {
+    nvidia.enable = lib.mkEnableOption "Nvidia Drivers";
 };
 
 
 #--- [ Config ] -----------------------------------------------------
-config = lib.mkIf option.enable (lib.mkMerge [
+config = lib.mkMerge [
+
     {
         boot.initrd.availableKernelModules = [ "amdgpu" "i915" ];
 
@@ -21,7 +20,7 @@ config = lib.mkIf option.enable (lib.mkMerge [
         };
     }
 
-    (lib.mkIf option.nvidia {
+    (lib.mkIf option.nvidia.enable {
         services.xserver.videoDrivers = [ "nvidia"  ];
 
         hardware.nvidia = {
@@ -30,4 +29,5 @@ config = lib.mkIf option.enable (lib.mkMerge [
             nvidiaSettings = true;
         };
     })
-]);}
+
+];}

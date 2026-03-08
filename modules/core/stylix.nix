@@ -1,12 +1,22 @@
 { config, lib, inputs, pkgs, ... }: let
-    option = config.modules.home.stylix;
+    option = config.modules.core.stylix;
 in {
 
 #--- [ Options ] ----------------------------------------------------
-options.modules.home.stylix = {
-    enable = lib.mkEnableOption "Stylix Theming";
+options.modules.core.stylix = {
+    catppuccin.flavor = lib.mkOption { type = lib.types.str; default = "macchiato"; };
 
-    theme = lib.mkOption { type = lib.types.str; default = "catppuccin-mocha"; };
+    themeOverride = {
+        base16 = lib.mkOption { type = lib.types.str; default = ""; };
+
+        discord.quickCss = lib.mkOption { type = lib.types.str; default = " "; };
+
+        spotify = {
+            theme = lib.mkOption { type = lib.types.str; default = ""; };
+            colorScheme = lib.mkOption { type = lib.types.str; default = ""; };
+        };
+    };
+
     cursor = {
         package = lib.mkOption { type = lib.types.package; default = pkgs.capitaine-cursors-themed; };
         name = lib.mkOption { type = lib.types.str; default = "Capitaine Cursors"; };
@@ -15,12 +25,14 @@ options.modules.home.stylix = {
 
 
 #--- [ Config ] -----------------------------------------------------
-config = lib.mkIf option.enable {
+config = {
 
     fonts.fontconfig.enable = true;
 
     home.packages = with pkgs; [
         noto-fonts
+        noto-fonts-cjk-sans
+        noto-fonts-cjk-serif
         dejavu_fonts
         liberation_ttf
         nerd-fonts.jetbrains-mono
@@ -28,7 +40,16 @@ config = lib.mkIf option.enable {
 
     stylix = {
         enable = true;
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/${option.theme}.yaml";
+
+        base16Scheme = if option.themeOverride.base16 == ""
+            then "${pkgs.base16-schemes}/share/themes/catppuccin-${option.catppuccin.flavor}.yaml"
+            else "${pkgs.base16-schemes}/share/themes/${option.themeOverride.base16}.yaml";
+
+        polarity = if option.themeOverride.base16 != ""
+            then "either"
+            else if option.catppuccin.flavor == "latte"
+                then "light"
+            else "dark";
 
         cursor = {
             package = option.cursor.package;
@@ -55,9 +76,20 @@ config = lib.mkIf option.enable {
             };
             sizes = {
                 applications = 12;
+                desktop = 11;
                 terminal = 11;
             };
         };
+
+        targets.waybar.enable = false;
+
+        targets.spicetify.enable =
+            if option.themeOverride.spotify.theme != "" || option.themeOverride.base16 == ""
+                then false else true;
+
+        targets.nixcord.enable = 
+            if option.themeOverride.discord.quickCss != " " || option.themeOverride.base16 == ""
+                then false else true;
 
         targets.firefox.colorTheme.enable = true;
         targets.firefox.profileNames = [ "default" ];

@@ -1,22 +1,19 @@
-{ config, hmConfig, lib, pkgs, stateVersion, user, ... }: let enabledModules = {
-    modules.system = {
-        # Enable Modules
-        boot.bootloader.enable = true;
-        boot.tuigreet.enable = true;
-        hardware.graphics.enable = true;
-        hardware.audio.enable = true;
-        shell.aliases.enable = true;
-        shell.zsh.enable = true;
-        polkitRules.enable = true;
-    };}; in {
+{ config, hmConfig, lib, pkgs, stateVersion, user, ... }: {
 
     imports = [
+        # Core Modules
+        ../modules/core/bootloader.nix
+        ../modules/core/graphics.nix
+        ../modules/core/audio.nix
+        ../modules/core/aliases.nix
+        ../modules/core/polkit-rules.nix
+
         ./imports/packages-system.nix
         ./imports/services.nix
-        ../modules/system/.imports.nix
+        ../modules/system
     ];
 
-config = lib.recursiveUpdate enabledModules {
+config = {
 
     # Localization
     time.timeZone = "Europe/Moscow";

@@ -111,6 +111,10 @@ config = lib.mkIf option.enable {
                     install_url = mkUrl "frankerfacez";
                     installation_mode = "normal_installed";
                 };
+                "FirefoxColor@mozilla.com" = {
+                    install_url = mkUrl "firefox-color";
+                    installation_mode = "force_installed";
+                };
             };
         };
     };

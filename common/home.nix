@@ -1,16 +1,14 @@
-{ config, osConfig, lib, pkgs, stateVersion, user, ... }: let enabledModules = {
-    modules.home = {
-        # Enable Modules
-        stylix.enable = true;
-        firefox.enable = true;
-    };}; in {
+{ config, osConfig, lib, pkgs, stateVersion, user, ... }: {
 
     imports = [
+        # Core Modules
+        ../modules/core/stylix.nix
+
         ./imports/packages-home.nix
-        ../modules/home/.imports.nix
+        ../modules/home
     ];
 
-config = lib.recursiveUpdate enabledModules {
+config = {
 
     # Options
     programs.git = {

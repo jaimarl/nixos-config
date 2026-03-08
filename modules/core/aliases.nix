@@ -1,17 +1,17 @@
-{ config, hmConfig, lib, pkgs, host, user, ... }: let
-    option = config.modules.system.shell.aliases;
+{ config, lib, host, ... }: let
+    option = config.modules.core.aliases;
 in {
 
 #--- [ Options ] ----------------------------------------------------
-options.modules.system.shell.aliases = {
-    enable = lib.mkEnableOption "Global Aliases";
+options.modules.core.aliases = {
+    nixos.enable = lib.mkOption { type = lib.types.bool; default = true; };
 };
 
 
 #--- [ Config ] -----------------------------------------------------
-config = lib.mkIf option.enable {
+config = {
 
-    environment.shellAliases = {
+    environment.shellAliases = lib.mkIf option.nixos.enable {
         nswitch = "sudo nixos-rebuild switch --flake ~/.nixos/#${host}";
         nboot = "sudo nixos-rebuild boot --flake ~/.nixos/#${host}";
         ntest = "sudo nixos-rebuild test --flake ~/.nixos/#${host}";

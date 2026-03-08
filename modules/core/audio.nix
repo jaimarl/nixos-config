@@ -1,17 +1,15 @@
 { config, lib, pkgs, ... }: let
-    option = config.modules.system.hardware.audio;
+    option = config.modules.core.audio;
 in {
 
 #--- [ Options ] ----------------------------------------------------
-options.modules.system.hardware.audio = {
-    enable = lib.mkEnableOption "Pipewire";
-
-    monoPlayback = lib.mkEnableOption "Audio Mono Playback";
+options.modules.core.audio = {
+    monoPlayback.enable = lib.mkEnableOption "Audio Mono Playback";
 };
 
 
 #--- [ Config ] -----------------------------------------------------
-config = lib.mkIf option.enable {
+config = {
 
     environment.systemPackages = with pkgs; [
         pulsemixer
@@ -26,7 +24,7 @@ config = lib.mkIf option.enable {
         jack.enable = true;
     };
 
-    services.pipewire.extraConfig.pipewire."99-mono-output" = lib.mkIf option.monoPlayback {
+    services.pipewire.extraConfig.pipewire."99-mono-output" = lib.mkIf option.monoPlayback.enable {
         "context.modules" = [{
             name = "libpipewire-module-loopback";
             args = {

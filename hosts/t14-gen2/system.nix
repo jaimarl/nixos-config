@@ -1,27 +1,34 @@
-{ config, hmConfig, lib, pkgs, user, ... }: let enabledModules = {
-    modules.system = {
-        # Enable Modules
-        hardware.bluetooth.enable = true;
-        hardware.wifi.enable = true;
-        hardware.audio.monoPlayback = true;
-        boot.swap.enable = true;
-        boot.zram.enable = true;
-        wm.hyprland.enable = true;
-        gaming.enable = true;
-    };}; in {
-
+{ config, hmConfig, lib, pkgs, user, ... }: {
+    
     imports = [
-        ./.hardware.nix
+        ./hardware.nix
         ./imports/packages-system.nix
         ./imports/services.nix
     ];
 
-config = lib.recursiveUpdate enabledModules {
+config = {
+
+    # Enable & Configure Modules
+    modules.system = {
+        hardware = {
+            wifi.enable = true;
+            bluetooth.enable = true;
+        };
+        shell.zsh.enable = true;
+        boot = {
+            tuigreet.enable = true;
+            swap.enable = true;
+            zram.enable = true;
+        };
+        wm.hyprland = {
+            enable = true;
+            opacity.enable = false;
+            monitors = [ "eDP-1, 1920x1080@60, 0x0, 1" ];
+        };
+    };
 
     # Hostname
     networking.hostName = "nix-btw";
-
-    modules.system.wm.hyprland.monitors = [ "eDP-1, 1920x1080@60, 0x0, 1" ];
 
 #--------------------------------------------------------------------
     users.users.${user} = {

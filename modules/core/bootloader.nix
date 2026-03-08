@@ -1,15 +1,15 @@
 { config, lib, ... }: let
-    option = config.modules.system.boot.bootloader;
+    # option = config.modules.system.boot.bootloader;
 in {
 
 #--- [ Options ] ----------------------------------------------------
-options.modules.system.boot.bootloader = {
-    enable = lib.mkEnableOption "Systemd Bootloader";
-};
+# options.modules.system.boot.bootloader = {
+#     # Options
+# };
 
 
 #--- [ Config ] -----------------------------------------------------
-config = lib.mkIf option.enable {
+config = {
 
     boot.loader = {
         systemd-boot = {

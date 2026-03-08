@@ -16,6 +16,11 @@ config = {
         "Super, B, exec, firefox"
 
         # Screen
+        "Super Shift, S, exec, hyprshot -zm region -o ~/Pictures/Screenshots"
+        "Super Control, S, exec, hyprshot -m active -m output -o ~/Pictures/Screenshots"
+
+        "Super Shift, P, exec, hyprpicker -a"
+
         "Super, Equal, exec, pypr zoom ++1"
         "Super, Minus, exec, pypr zoom --1"
         "Super, 0, exec, pypr zoom 1.0"
@@ -30,10 +35,10 @@ config = {
         "Super, up, movefocus, u"
         "Super, down, movefocus, d"
 
-        "Super Shift, left, movewindow, l"
-        "Super Shift, right, movewindow, r"
-        "Super Shift, up, movewindow, u"
-        "Super Shift, down, movewindow, d"
+        "Super Shift, left, swapwindow, l"
+        "Super Shift, right, swapwindow, r"
+        "Super Shift, up, swapwindow, u"
+        "Super Shift, down, swapwindow, d"
 
         # Workspaces
         "Super, 1, workspace, 1"

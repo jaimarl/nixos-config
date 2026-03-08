@@ -1,28 +1,20 @@
-{ inputs, pkgs, ... }: {
+{ pkgs, stable, ... }: {
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
-    nixpkgs.config = {
-        allowUnfree = true;
-        permittedInsecurePackages = [  ];
-    };
 
     environment.systemPackages = with pkgs; [
         # CLI Utils
+        nvd
         git
         tree
-        ripgrep
         jq
         fd
+        ripgrep
         fastfetch
         brightnessctl
-        
-        # Neovim
+
+        # TUI Utils
         neovim
-        luajitPackages.luarocks_bootstrap
-        tree-sitter
-        gcc
-        lua-language-server
-        marksman
     ];
 
     programs = {

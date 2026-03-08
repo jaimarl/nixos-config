@@ -7,4 +7,5 @@ config.home-manager.users.${user} = {
 
     # Home Manager Options
     options.global.home.terminal = lib.mkOption { type = lib.types.str; default = ""; };
+
 };}

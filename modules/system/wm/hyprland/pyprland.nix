@@ -9,7 +9,7 @@ config = {
         "pypr"
     ];
 
-    xdg.configFile."hypr/pyprland.toml".text = ''
+    xdg.configFile."pypr/config.toml".text = ''
         [pyprland]
         plugins = [
             "magnify"

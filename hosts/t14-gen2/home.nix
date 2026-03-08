@@ -1,14 +1,17 @@
-{ config, osConfig, lib, pkgs, stateVersion, user, ... }: let enabledModules = {
-    modules.home = {
-        # Enable Modules
-        kitty.enable = true;
-    };}; in {
+{ config, osConfig, lib, pkgs, stateVersion, user, ... }: {
 
     imports = [
         ./imports/packages-home.nix
     ];
     
-config = lib.recursiveUpdate enabledModules {
+config = {
+
+    # Enable & Configure Modules
+    modules.home = {
+        kitty.enable = true;
+        firefox.enable = true;
+        spotify.enable = true;
+    };
     
     # Options
     wayland.windowManager.hyprland.settings = {

@@ -5,14 +5,12 @@ in {
 #--- [ Options ] ----------------------------------------------------
 options.modules.system.boot.swap = {
     enable = lib.mkEnableOption "Swapfile";
+
+    size = lib.mkOption { type = lib.types.int; default = 4096; };
 };
 
 
 #--- [ Config ] -----------------------------------------------------
-options.modules.system.boot.swap = {
-    size = lib.mkOption { type = lib.types.int; default = 4096; };
-};
-
 config = lib.mkIf option.enable {
 
     swapDevices = [{
