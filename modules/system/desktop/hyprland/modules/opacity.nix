@@ -1,5 +1,5 @@
 { config, osConfig, lib, ... }: let
-    option = osConfig.modules.system.wm.hyprland;
+    option = osConfig.modules.system.desktop.hyprland;
 in {
 
 #--- [ Config ] -----------------------------------------------------
@@ -13,7 +13,7 @@ config = lib.mkIf option.opacity.enable {
             "opacity 1, match:class (firefox), match:title (.*Twitch — Mozilla Firefox)"
 
             "opacity 1, match:fullscreen true"
-        ] ++ option.opacity.extraRules;
+        ];
         layerrule = [
             "blur true, match:namespace (waybar)"
         ];

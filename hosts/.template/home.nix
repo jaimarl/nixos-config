@@ -2,17 +2,23 @@
 
     imports = [
         ./imports/packages-home.nix
-        ../modules/core/home/stylix.nix
-        ../modules/home
     ];
-
+    
 config = {
 
-    # Options
-    programs.git = {
-        enable = true;
-        settings.user.name = "jaimarl";
-        settings.user.email = "jaimarl.me@gmail.com";
+    # Set Host Options
+    host.home = {
+        # Configure paths and options here
+        # For options list check common/imports/host-options.nix
+    };
+
+    # Enable & Configure Modules
+    modules.core.stylix = {
+        # Theme overrides
+    };
+
+    modules.home = {
+
     };
 
 #--------------------------------------------------------------------

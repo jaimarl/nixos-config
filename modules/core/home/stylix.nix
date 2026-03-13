@@ -4,18 +4,7 @@ in {
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.core.stylix = {
-    catppuccin.flavor = lib.mkOption { type = lib.types.str; default = "macchiato"; };
-
-    themeOverride = {
-        base16 = lib.mkOption { type = lib.types.str; default = ""; };
-
-        discord.quickCss = lib.mkOption { type = lib.types.str; default = " "; };
-
-        spotify = {
-            theme = lib.mkOption { type = lib.types.str; default = ""; };
-            colorScheme = lib.mkOption { type = lib.types.str; default = ""; };
-        };
-    };
+    flavor = lib.mkOption { type = lib.types.str; default = "macchiato"; };
 
     cursor = {
         package = lib.mkOption { type = lib.types.package; default = pkgs.capitaine-cursors-themed; };
@@ -41,15 +30,9 @@ config = {
     stylix = {
         enable = true;
 
-        base16Scheme = if option.themeOverride.base16 == ""
-            then "${pkgs.base16-schemes}/share/themes/catppuccin-${option.catppuccin.flavor}.yaml"
-            else "${pkgs.base16-schemes}/share/themes/${option.themeOverride.base16}.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-${option.flavor}.yaml";
 
-        polarity = if option.themeOverride.base16 != ""
-            then "either"
-            else if option.catppuccin.flavor == "latte"
-                then "light"
-            else "dark";
+        polarity = if option.flavor == "latte" then "light" else "dark";
 
         cursor = {
             package = option.cursor.package;
@@ -82,14 +65,9 @@ config = {
         };
 
         targets.waybar.enable = false;
-
-        targets.spicetify.enable =
-            if option.themeOverride.spotify.theme != "" || option.themeOverride.base16 == ""
-                then false else true;
-
-        targets.nixcord.enable = 
-            if option.themeOverride.discord.quickCss != " " || option.themeOverride.base16 == ""
-                then false else true;
+        targets.hyprlock.enable = false;
+        targets.spicetify.enable = false;
+        targets.nixcord.enable = false;
 
         targets.firefox.colorTheme.enable = true;
         targets.firefox.profileNames = [ "default" ];

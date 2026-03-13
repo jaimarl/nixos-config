@@ -4,14 +4,14 @@
         ./boot/swap.nix
         ./boot/zram.nix
 
+        ./desktop/hyprland
+        
         ./hardware/bluetooth.nix
         ./hardware/wifi.nix
 
         ./shell/zsh.nix
 
-        ./wm/hyprland
-
-        ./virtualisation.nix
         ./gaming.nix
+        ./virtualisation.nix
     ];
 }

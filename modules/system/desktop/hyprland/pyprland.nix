@@ -1,12 +1,12 @@
-{ config, osConfig, lib, ... }: let
-    option = osConfig.modules.system.wm.hyprland;
+{ config, osConfig, lib, pkgs, ... }: let
+    option = osConfig.modules.system.desktop.hyprland;
 in {
 
 #--- [ Config ] -----------------------------------------------------
 config = { 
     
     wayland.windowManager.hyprland.settings.exec-once = [
-        "pypr"
+        "${pkgs.pyprland}/bin/pypr"
     ];
 
     xdg.configFile."pypr/config.toml".text = ''

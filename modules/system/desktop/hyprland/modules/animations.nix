@@ -1,31 +1,13 @@
 { config, osConfig, lib, ... }: let
-    option = osConfig.modules.system.wm.hyprland;
+    option = osConfig.modules.system.desktop.hyprland;
 in {
 
 #--- [ Config ] -----------------------------------------------------
 config = {
-
+    
     wayland.windowManager.hyprland.settings = {
-        general = {
-            gaps_in = 3;
-            gaps_out = 6;
-
-            border_size = 2;
-        };
-
-        decoration = {
-            rounding = 5;
-            rounding_power = 3;
-
-            blur = {
-                special = true;
-                size = 10;
-                passes = 3;
-            };
-        };
-
         animations = {
-            enabled = true;
+            enabled = option.animations.enable;
             bezier = [
                 "default, 0.05, 0.9, 0.1, 1"
                 "wind, 0.05, 0.9, 0.1, 1"

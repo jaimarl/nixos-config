@@ -4,7 +4,9 @@ in {
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.system.gaming = {
-    enable = lib.mkEnableOption "Gaming Launchers & Utils";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
+
+    mangohud.sessionWide = lib.mkEnableOption "Auto MangoHud overlay in supported apps";
 };
 
 
@@ -14,7 +16,6 @@ config = lib.mkIf option.enable {
     environment.systemPackages = with pkgs; [
         prismlauncher
         heroic
-        mangohud
     ];
 
     programs.gamemode.enable = true;
@@ -22,6 +23,10 @@ config = lib.mkIf option.enable {
         enable = true;
         protontricks.enable = true;
         gamescopeSession.enable = true;
+    };
+
+    home-manager.users.${user} = {
+        programs.mangohud.enable = true;
     };
 
 };}

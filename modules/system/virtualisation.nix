@@ -4,7 +4,7 @@ in {
 
 #--- [ Options ] ---------------------------------------------------- 
 options.modules.system.virtualisation = {
-    enable = lib.mkEnableOption "Virtualisation";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
 };
 
 

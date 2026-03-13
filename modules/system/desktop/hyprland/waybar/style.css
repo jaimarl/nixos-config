@@ -3,10 +3,15 @@
 }
 
 /* Icons */
+#mpris.play,
+#mpris.prev,
+#mpris.next,
+#custom-cal-icon,
+#custom-clock-icon,
+#idle_inhibitor,
+#custom-record,
 #network.icon,
-#clock.cal-icon,
-#clock.icon,
-#language.icon,
+#custom-language-icon,
 #backlight.icon,
 #pulseaudio.mic,
 #pulseaudio.icon,
@@ -23,9 +28,10 @@
 }
 
 /* Text */
-#network.text,
+#mpris.text,
 #clock.cal-text,
 #clock.text,
+#network.text,
 #language.text,
 #backlight.text,
 #pulseaudio.text,
@@ -83,23 +89,58 @@
     text-shadow: none;
 }
 
-
-/* Center Modules */
-#clock.cal-icon,
-#clock.icon {
+#mpris.play {
+    margin-left: 4px;
+    min-width: 8px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
-#clock.cal-text {
-    margin-right: 5px;
+#mpris.prev,
+#mpris.next {
+    padding-left: 5px;
+}
+#mpris.text {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+#custom-cal-icon {
+/* #custom-clock-icon { */
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 #clock.text {
     min-width: 39px;
 }
-#clock.cal-text,
 #clock.text {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+#idle_inhibitor {
+    margin-left: 4px;
+    padding-right: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#idle_inhibitor.activated {
+    color: @base0B;
+}
+#idle_inhibitor.deactivated {
+    color: @base03;
+}
+
+#custom-record {
+    padding-right: 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#custom-record.running {
+    color: @base08;
+}
+#custom-record.stopped {
+    color: @base03;
 }
 
 
@@ -108,10 +149,22 @@
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+#network.icon.disabled {
+    color: @base03;
+}
 #network.icon.disconnected {
     color: @base08;
 }
+#network.text {
+    margin-right: 4px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
 
+#custom-language-icon {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
 #language.text {
     min-width: 19px;
 }
@@ -126,9 +179,10 @@
 }
 #pulseaudio.mic {
     min-width: 14px;
+    padding-right: 2px;
 }
 #pulseaudio.icon {
-    padding-left: 0px;
+    padding-left: 2px;
 }
 #pulseaudio.text {
     min-width: 37px;

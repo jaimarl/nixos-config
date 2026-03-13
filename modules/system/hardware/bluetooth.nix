@@ -4,7 +4,7 @@ in {
 
 #--- [ Options ] ---------------------------------------------------- 
 options.modules.system.hardware.bluetooth = {
-    enable = lib.mkEnableOption "Bluetooth";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
 };
 
 

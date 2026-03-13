@@ -6,7 +6,7 @@ in {
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.home.spotify = {
-    enable = lib.mkEnableOption "Spotify";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
 };
 
 
@@ -33,16 +33,8 @@ config = lib.mkIf option.enable {
             lyricsPlus
         ];
 
-        theme =
-            if stylix.themeOverride.spotify.theme != ""
-                then spicePkgs.themes.${stylix.themeOverride.spotify.theme}
-            else lib.mkDefault spicePkgs.themes.catppuccin;
+        theme = spicePkgs.themes.catppuccin;
 
-        colorScheme = 
-            if stylix.themeOverride.spotify.colorScheme != ""
-                then stylix.themeOverride.spotify.colorScheme
-            else if stylix.themeOverride.base16 == "" && stylix.themeOverride.spotify.theme == ""
-                then lib.mkDefault "${stylix.catppuccin.flavor}"
-            else lib.mkDefault "";
+        colorScheme = "${stylix.flavor}";
     };
 };}

@@ -4,7 +4,7 @@ in {
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.core.audio = {
-    monoPlayback.enable = lib.mkEnableOption "Audio Mono Playback";
+    monoPlayback.enable = lib.mkOption { type = lib.types.bool; default = false; };
 };
 
 
@@ -22,6 +22,7 @@ config = {
         alsa.support32Bit = true;
         pulse.enable = true;
         jack.enable = true;
+        wireplumber.enable = true;
     };
 
     services.pipewire.extraConfig.pipewire."99-mono-output" = lib.mkIf option.monoPlayback.enable {

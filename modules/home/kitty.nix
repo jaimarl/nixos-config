@@ -4,14 +4,12 @@ in {
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.home.kitty = {
-    enable = lib.mkEnableOption "Kitty Terminal";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
 };
 
 
 #--- [ Config ] -----------------------------------------------------
 config = lib.mkIf option.enable {
-
-    global.home.terminal = "kitty";
 
     programs.kitty = {
         enable = true;

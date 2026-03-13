@@ -4,7 +4,7 @@ in {
 
 #--- [ Options ] ---------------------------------------------------- 
 options.modules.system.hardware.wifi = {
-    enable = lib.mkEnableOption "WiFi";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
 };
 
 

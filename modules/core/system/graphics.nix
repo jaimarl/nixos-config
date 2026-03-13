@@ -4,7 +4,7 @@ in {
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.core.graphics = {
-    nvidia.enable = lib.mkEnableOption "Nvidia Drivers";
+    nvidia.enable = lib.mkOption { type = lib.types.bool; default = false; };
 };
 
 

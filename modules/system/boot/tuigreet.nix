@@ -4,13 +4,16 @@ in {
 
 #--- [ Options ] ---------------------------------------------------- 
 options.modules.system.boot.tuigreet = {
-    enable = lib.mkEnableOption "Tuigreet";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
 
-    cmd = lib.mkOption { type = lib.types.str; default = config.global.system.shell; };
+    cmd = lib.mkOption { type = lib.types.str; default = "zsh"; };
 };
 
 
 #--- [ Config ] -----------------------------------------------------
+options.modules.system.boot.tuigreet = {
+};
+
 config = lib.mkIf option.enable {
 
     environment.systemPackages = with pkgs; [

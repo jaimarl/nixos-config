@@ -1,20 +1,15 @@
-{ pkgs, stable, ... }: {
-
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+{ pkgs, stable, user, ... }: {
 
     environment.systemPackages = with pkgs; [
         # CLI Utils
-        nvd
         git
         tree
-        jq
-        fd
-        ripgrep
         fastfetch
         brightnessctl
 
         # TUI Utils
         neovim
+        btop
     ];
 
     programs = {

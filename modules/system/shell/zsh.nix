@@ -4,7 +4,7 @@ in {
 
 #--- [ Options ] ---------------------------------------------------- 
 options.modules.system.shell.zsh = {
-    enable = lib.mkEnableOption "Zsh Shell";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
 };
 
 
@@ -13,7 +13,5 @@ config = lib.mkIf option.enable {
 
     programs.zsh.enable = true;
     users.defaultUserShell = pkgs.zsh;
-
-    global.system.shell = "zsh";
 
 };}

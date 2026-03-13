@@ -4,7 +4,7 @@ in {
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.system.boot.swap = {
-    enable = lib.mkEnableOption "Swapfile";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
 
     size = lib.mkOption { type = lib.types.int; default = 4096; };
 };

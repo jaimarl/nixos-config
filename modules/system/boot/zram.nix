@@ -4,7 +4,7 @@ in {
 
 #--- [ Options ] ---------------------------------------------------- 
 options.modules.system.boot.zram = {
-    enable = lib.mkEnableOption "zRam";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
 };
 
 

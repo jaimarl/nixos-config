@@ -5,7 +5,7 @@ in {
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.home.firefox = {
-    enable = lib.mkEnableOption "Firefox Browser";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
 
     hideNavigation = lib.mkEnableOption "Hide Navigation Buttons";
 };

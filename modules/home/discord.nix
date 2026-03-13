@@ -5,7 +5,7 @@ in {
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.home.discord = {
-    enable = lib.mkEnableOption "Discord";
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
 
     quickCss = lib.mkOption { type = lib.types.str; default = " "; };
 };
@@ -21,12 +21,7 @@ config = lib.mkIf option.enable {
         discord.vencord.enable = false;
         vesktop.enable = true;
 
-        quickCss = 
-            if stylix.themeOverride.discord.quickCss != " "
-                then stylix.themeOverride.discord.quickCss
-            else if stylix.themeOverride.base16 == ""
-                then "@import url(\"https://catppuccin.github.io/discord/dist/catppuccin-${stylix.catppuccin.flavor}-blue.theme.css\");"
-            else " ";
+        quickCss = "@import url(\"https://catppuccin.github.io/discord/dist/catppuccin-${stylix.flavor}-blue.theme.css\");";
 
         config = {
             useQuickCss = true;

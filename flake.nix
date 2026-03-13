@@ -38,7 +38,6 @@
                 specialArgs = { inherit inputs stable host stateVersion user; };
                 modules = [
                     pkgsCfg 
-                    ./common/global-options.nix
                     ./common/system.nix
                     ./hosts/${host}/system.nix
                     home-manager.nixosModules.home-manager {
