@@ -39,6 +39,8 @@ options.modules.system.desktop.hyprland = {
     };
 
     record.codec = lib.mkOption { type = lib.types.str; default = "libx264"; };
+
+    showErrors = lib.mkOption { type = lib.types.bool; default = false; };
 };
 
 
@@ -94,6 +96,13 @@ home-manager.users.${user} = {
                     num_workspaces = 9;
                     persistent_workspaces = true;
                 };
+            };
+            misc = {
+                disable_hyprland_logo = true;
+                background_color = lib.mkForce "rgb(000000)";
+            };
+            debug = {
+                suppress_errors = ! option.showErrors;
             };
         } option.extraConfig;
 

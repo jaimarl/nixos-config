@@ -33,7 +33,6 @@ config = {
         };
         layerrule = [
             "no_anim true, match:namespace (swww-daemon)"
-            "no_anim true, match:namespace (waybar)"
             "no_anim true, match:namespace (hyprpicker)"
             "no_anim true, match:namespace (selection)"
         ];

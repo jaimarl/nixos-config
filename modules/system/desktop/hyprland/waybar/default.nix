@@ -36,6 +36,7 @@ config = {
                 && option.waybar.position == "bottom" then 5 else 0;
 
             width = if option.waybar.width > 0 then option.waybar.width else null;
+            height = 36;
 
             modules-left = [
                 "custom/nix"
@@ -45,9 +46,6 @@ config = {
             modules-center = [
                 "custom/cal-icon" "clock#cal-text"
                 "custom/clock-icon" "clock#text"
-            ] ++ lib.optionals (option.hypridle.enable) [
-                "idle_inhibitor"
-            ] ++ [
                 "custom/record"
             ];
             modules-right = [
@@ -324,13 +322,6 @@ config = {
             }
             
             ${builtins.readFile ./style.css}
-
-            #custom-record {
-                margin-left: ${toString (if option.hypridle.enable then 0 else 4)}px;
-                padding-left: ${toString (if option.hypridle.enable then 5 else 10)}px;
-                border-top-left-radius: ${toString (if option.hypridle.enable then 0 else 5)}px;
-                border-bottom-left-radius: ${toString (if option.hypridle.enable then 0 else 5)}px;
-            }
 
             #pulseaudio.text {
                 border-top-right-radius: ${toString (if osConfig.host.system.hasBattery then 0 else 5)};

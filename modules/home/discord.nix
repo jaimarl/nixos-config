@@ -6,8 +6,6 @@ in {
 #--- [ Options ] ----------------------------------------------------
 options.modules.home.discord = {
     enable = lib.mkOption { type = lib.types.bool; default = false; };
-
-    quickCss = lib.mkOption { type = lib.types.str; default = " "; };
 };
 
 

@@ -20,6 +20,9 @@ config = {
 
             "suppress_event maximize"
         ];
+        layerrule = [
+            "animation slide, $?:namespace waybar"
+        ];
     };
 
 };}

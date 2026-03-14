@@ -58,12 +58,16 @@
                     ;;
             esac
 
+            if [[ -z $(pgrep swww-daemon) ]]; then
+                swww-daemon &
+            fi
+
             ABS_PATH=$(realpath "$WALLPAPER")
 
             ln -sf "$ABS_PATH" "$CACHE/current.png"
             swww img "$ABS_PATH" \
                 --transition-type grow \
-                --transition-pos 0.85,0.95 \
+                --transition-pos 0.5,${toString (if option.waybar.position == "top" then 0.99 else 0)} \
                 --transition-step 90 \
                 --transition-duration 1 \
                 --transition-fps 144

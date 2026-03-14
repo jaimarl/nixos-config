@@ -26,55 +26,42 @@ config = {
                 path = "~/.cache/wallpaper/current.png";
                 blur_size = 4;
                 blur_passes = 3;
-                contrast = 1.75;
+                brightness = 0.6;
+                contrast = 1.5;
             }];
 
-            shape = [
-                { # Main Panel
-                    size = "500, 500";
-                    rounding = 20;
-                    color = c.base00;
-                }
-                { # User Panel
-                    size = "320, 55";
-                    position = "0, -51";
-                    rounding = 20;
-                    color = c.base01;
-                }
-            ];
-
             label = [
-                { # Time
-                    font_family = "${fonts.sansSerif.name} Bold";
-                    text = "cmd[update:1000] echo \"$(date +\"%H:%M\")\"";
-                    font_size = 60;
-                    position = "0, 119";
+                { # Hours
+                    font_family = "${pkgs.inter}/share/fonts/truetype/Inter.ttc Black";
+                    text = "cmd[update:1000] echo \"$(date +\"%H\")\"";
+                    font_size = 125;
+                    position = "0, 230";
+                    color = c.base05;
+                }
+                { # Minutes
+                    font_family = "${pkgs.inter}/share/fonts/truetype/Inter.ttc Black";
+                    text = "cmd[update:1000] echo \"$(date +\"%M\")\"";
+                    font_size = 125;
+                    position = "0, 100";
                     color = c.base0D;
                 }
                 { # Date
-                    font_family = "${fonts.sansSerif.name} Semibold";
+                    font_family = "${fonts.sansSerif.name} Bold";
                     text = "cmd[update:1000] echo -e \"$(date +\"%A, %d %B\")\"";
-                    font_size = 19;
-                    position = "0, 49";
-                    color = c.base05;
-                }
-                { # Username
-                    font_family = "${fonts.sansSerif.name} Semibold";
-                    text = "$USER";
-                    font_size = 16;
-                    position = "0, -51";
+                    font_size = 15;
                     color = c.base05;
                 }
                 { # Spotify
                     font_family = "${fonts.sansSerif.name}";
                     text = "cmd[update:1000] ${spotify}";
-                    font_size = 11;
-                    position = "0, -195";
-                    color = c.base04;
+                    font_size = 14;
+                    position = "0, 30";
+                    valign = "bottom";
+                    color = c.base05;
                 }
             ] ++ lib.optionals (osConfig.host.system.hasBattery) [
                 { # Battery
-                    font_family = "${fonts.sansSerif.name} Semibold";
+                    font_family = "${fonts.sansSerif.name}";
                     text = "cmd[update:5000] echo \"$(status=$(cat /sys/class/power_supply/BAT0/status); cap=$(cat /sys/class/power_supply/BAT0/capacity); icons=('󰂎' '󰁺' '󰁻' '󰁼' '󰁽' '󰁾' '󰁿' '󰂀' '󰂁' '󰂂' '󰁹'); idx=$((cap / 9)); [ $idx -gt 10 ] && idx=10; if [ \"$status\" = 'Charging' ]; then icon='󰂄'; else icon=\${icons[$idx]}; fi; echo \"$cap%   $icon\")\"";
                     font_size = 14;
                     position = "-30, 30";
@@ -87,9 +74,9 @@ config = {
             input-field = [{ # Password
                 font_family = "${fonts.sansSerif.name}";
                 placeholder_text = "<span foreground=\"##${colors.base04}\">Пароль</span>";
-                size = "320, 55";
-                position = "0, -121";
-                rounding = 20;
+                size = "250, 50";
+                position = "0, -264";
+                rounding = 15;
                 dots_spacing = 0.25;
                 outline_thickness = 0;
                 fade_on_empty = false;

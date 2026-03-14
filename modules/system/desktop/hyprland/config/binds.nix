@@ -38,9 +38,9 @@ config = {
 
             "Super Shift, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a"
 
-            "Super, Equal, exec, pypr zoom ++1"
-            "Super, Minus, exec, pypr zoom --1"
-            "Super, 0, exec, pypr zoom 1.0"
+            "Super, Equal, exec, ${pkgs.pyprland}/bin/pypr zoom ++1"
+            "Super, Minus, exec, ${pkgs.pyprland}/bin/pypr zoom --1"
+            "Super, 0, exec, ${pkgs.pyprland}/bin/pypr zoom 1.0"
 
             "Super, L, exec, hyprlock"
 
