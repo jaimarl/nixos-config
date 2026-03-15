@@ -46,6 +46,9 @@ config = {
             modules-center = [
                 "custom/cal-icon" "clock#cal-text"
                 "custom/clock-icon" "clock#text"
+            ] ++ lib.optionals (option.hypridle.enable) [
+                "idle_inhibitor"
+            ] ++ [
                 "custom/record"
             ];
             modules-right = [
@@ -143,25 +146,6 @@ config = {
                     activated = "󰅶";
                     deactivated = "󰾪";
                 };
-                tooltip = false;
-            };
-
-            "custom/notification" = {
-                format = "{icon}";
-                return-type = "json";
-                format-icons = {
-                    none = "󰂚";
-                    notification = "󰂚";
-                    inhibited-none = "󰂚";
-                    inhibited-notification = "󰂚";
-                    dnd-none = "󰂛";
-                    dnd-notification = "󰂛";
-                    dnd-inhibited-none = "󰂛";
-                    dnd-inhibited-notification = "󰂛";
-                };
-                exec-if = "which swaync-client";
-                exec = "swaync-client -swb";
-                on-click = "swaync-client -d -sw";
                 tooltip = false;
             };
 
@@ -322,6 +306,13 @@ config = {
             }
             
             ${builtins.readFile ./style.css}
+
+             #custom-record {
+                margin-left: ${toString (if option.hypridle.enable then 0 else 4)}px;
+                padding-left: ${toString (if option.hypridle.enable then 5 else 10)}px;
+                border-top-left-radius: ${toString (if option.hypridle.enable then 0 else 5)}px;
+                border-bottom-left-radius: ${toString (if option.hypridle.enable then 0 else 5)}px;
+            }
 
             #pulseaudio.text {
                 border-top-right-radius: ${toString (if osConfig.host.system.hasBattery then 0 else 5)};

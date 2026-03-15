@@ -1,6 +1,117 @@
 { config, osConfig, lib, pkgs, ... }: let
     option = osConfig.modules.system.desktop.hyprland;
 
+    screenshot = pkgs.writeShellApplication {
+        name = "screenshot";
+        runtimeInputs = with pkgs; [
+            procps coreutils
+            slurp
+            wl-clipboard
+            hyprshot
+            libnotify
+        ];
+        text = ''
+            SAVE_DIR="${config.host.home.paths.screenshots}"
+            FILE_NAME="$(date +'%Y-%m-%d-%H%M%S')_hyprshot.png"
+            FILE_PATH="$SAVE_DIR/$FILE_NAME"
+
+            mkdir -p "$SAVE_DIR"
+
+            notify () {
+                until [ -f "$FILE_PATH" ]
+                do
+                    sleep 0.1
+                done
+
+                notify-send -i "$FILE_PATH" -u low "Screenshot saved" "Image saved in $FILE_PATH and copied to the clipboard."
+            }
+
+            case "$1" in
+                region)
+                    hyprshot -m region -o "$SAVE_DIR" -f "$FILE_NAME" -zs & notify
+                    ;;
+                output)
+                    hyprshot -m active -m output -o "$SAVE_DIR" -f "$FILE_NAME" -s & notify
+                    ;;
+                *)
+                    exit 1
+                    ;;
+            esac
+
+        '';
+    };
+    
+    record = pkgs.writeShellApplication {
+        name = "record";
+        runtimeInputs = with pkgs; [
+            procps coreutils
+            slurp
+            jq
+            wl-clipboard
+            wf-recorder
+            ffmpegthumbnailer
+            libnotify
+        ];
+        text = ''
+            STATE_FILE="/tmp/wf-recorder-current-file.txt"
+            THUMB_FILE="''${XDG_RUNTIME_DIR:-/tmp}/video_thumb.png"
+            SAVE_DIR="${config.host.home.paths.records}"
+            FILENAME="$(date +'%Y-%m-%d-%H%M%S')_wf_recorder.mp4"
+            FULL_PATH="$SAVE_DIR/$FILENAME"
+
+            WF_ARGS=("-f" "$FULL_PATH" "-c" "${option.record.codec}")
+
+            mkdir -p "$SAVE_DIR"
+
+            if [[ "$1" == "stop" && -n $(pgrep wf-recorder) ]]; then
+                pkill -INT -x wf-recorder
+
+                if [ -f "$STATE_FILE" ]; then
+                    RECORDED_FILE=$(cat "$STATE_FILE")
+
+                    until [ -f "$RECORDED_FILE" ]
+                    do
+                        sleep 0.1
+                    done
+                    
+                    wl-copy -t text/uri-list "file://$RECORDED_FILE"
+                    
+                    ffmpegthumbnailer -i "$RECORDED_FILE" -o "$THUMB_FILE" -s 128
+                    notify-send -i "$THUMB_FILE" -u low "Recording saved" "Video saved in $RECORDED_FILE and copied to the clipboard."
+                    
+                    rm "$STATE_FILE"
+                fi
+                
+                pkill -RTMIN+2 waybar
+                exit 0
+            fi
+
+            case "$1" in
+                monitor)
+                    MONITOR=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
+                    WF_ARGS+=("-o" "$MONITOR")                    
+                    ;;
+                area)
+                    GEOMETRY=$(slurp)
+                    if [ -z "$GEOMETRY" ]; then
+                        exit 1
+                    fi
+                    WF_ARGS+=("-g" "$GEOMETRY")
+                    ;;
+                *)
+                    exit 1
+                    ;;
+            esac
+
+            echo "$FULL_PATH" > "$STATE_FILE"
+
+            pkill -RTMIN+2 waybar
+
+            wf-recorder "''${WF_ARGS[@]}" &
+            disown
+        '';
+    };
+
     toggleFloat = pkgs.writeShellScript "toggle-float" ''
         is_floating=$(hyprctl activewindow | awk -F": " '/floating:/ {print $2}')
 
@@ -27,14 +138,15 @@ config = {
             "Super, E, exec, kitty zsh -ic 'y; exec zsh'"
             "Super, Grave, exec, kitty nvim"
             "Super, B, exec, firefox"
+            "Super Shift, B, exec, firefox --private-window"
 
             # Screen
-            "Super Shift, S, exec, ${pkgs.hyprshot}/bin/hyprshot -zm region -o ${config.host.home.paths.screenshots}"
-            "Super Control, S, exec, ${pkgs.hyprshot}/bin/hyprshot -m active -m output -o ${config.host.home.paths.screenshots}"
+            "Super Shift, S, exec, ${screenshot}/bin/screenshot region"
+            "Super Control, S, exec, ${screenshot}/bin/screenshot output"
 
-            "Super Shift, R, exec, record area"
-            "Super Control, R, exec, record monitor"
-            "Super, R, exec, record stop"
+            "Super Shift, R, exec, ${record}/bin/record area"
+            "Super Control, R, exec, ${record}/bin/record monitor"
+            "Super, R, exec, ${record}/bin/record stop"
 
             "Super Shift, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker -a"
 

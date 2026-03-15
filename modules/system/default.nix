@@ -11,7 +11,7 @@
 
         ./shell/zsh.nix
 
-        ./gaming.nix
+        ./steam.nix
         ./virtualisation.nix
     ];
 }

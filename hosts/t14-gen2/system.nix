@@ -22,6 +22,7 @@ config = {
     };
 
     modules.system = {
+        steam.enable = true;
         hardware = {
             wifi.enable = true;
             bluetooth.enable = true;

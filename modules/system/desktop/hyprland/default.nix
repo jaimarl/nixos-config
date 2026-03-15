@@ -74,10 +74,10 @@ home-manager.users.${user} = {
         ./modules/hypridle.nix
         ./modules/opacity.nix
 
-        ./scripts/record.nix
         ./scripts/wallpaper.nix
 
         ./waybar
+        ./dunst.nix
         ./pyprland.nix
         ./hyprlock.nix
     ];

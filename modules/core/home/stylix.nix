@@ -65,6 +65,7 @@ config = {
         };
 
         targets.waybar.enable = false;
+        targets.dunst.enable = false;
         targets.hyprlock.enable = false;
         targets.spicetify.enable = false;
         targets.nixcord.enable = false;

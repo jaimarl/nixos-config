@@ -124,11 +124,24 @@
     border-bottom-right-radius: 5px;
 }
 
+#idle_inhibitor {
+    margin-left: 4px;
+    padding-right: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    transition: all 0.05s ease-in-out;
+}
+#idle_inhibitor.activated {
+    color: @base0B;
+}
+#idle_inhibitor.deactivated {
+    color: @base03;
+}
+
 #custom-record {
-    margin-left: 5px;
-    padding-left: 10px;
     padding-right: 10px;
-    border-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     transition: all 0.15s ease-in-out;
 }
 #custom-record.stopped {
@@ -138,6 +151,7 @@
     color: @base08;
     animation: record 2s ease-in-out infinite;
 }
+
 
 /* Right Modules */
 #network.icon {
@@ -193,9 +207,11 @@
 }
 #battery.icon.critical {
     color: @base08;
+    animation: record 1s ease-in-out infinite;
 }
 #battery.icon.charging {
     color: @base0B;
+    animation: none;
 }
 #battery.text {
     min-width: 37px;

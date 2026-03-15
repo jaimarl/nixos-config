@@ -101,6 +101,11 @@ config = lib.mkIf option.enable {
                     install_url = mkUrl "bitwarden-password-manager";
                     installation_mode = "normal_installed";
                 };
+                # YouTube to NotebookLM
+                "yt.to.notebooklm@gmail.com" = {
+                    install_url = mkUrl "youtube-to-notebooklm";
+                    installation_mode = "normal_installed";
+                };
                 # Hide YouTube Shorts
                 "{88ebde3a-4581-4c6b-8019-2a05a9e3e938}" = {
                     install_url = mkUrl "hide-youtube-shorts";
@@ -111,6 +116,7 @@ config = lib.mkIf option.enable {
                     install_url = mkUrl "frankerfacez";
                     installation_mode = "normal_installed";
                 };
+                # Firefox Color
                 "FirefoxColor@mozilla.com" = {
                     install_url = mkUrl "firefox-color";
                     installation_mode = "force_installed";

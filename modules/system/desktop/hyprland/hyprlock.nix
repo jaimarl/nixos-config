@@ -64,9 +64,9 @@ config = {
                     font_family = "${fonts.sansSerif.name}";
                     text = "cmd[update:5000] echo \"$(status=$(cat /sys/class/power_supply/BAT0/status); cap=$(cat /sys/class/power_supply/BAT0/capacity); icons=('󰂎' '󰁺' '󰁻' '󰁼' '󰁽' '󰁾' '󰁿' '󰂀' '󰂁' '󰂂' '󰁹'); idx=$((cap / 9)); [ $idx -gt 10 ] && idx=10; if [ \"$status\" = 'Charging' ]; then icon='󰂄'; else icon=\${icons[$idx]}; fi; echo \"$cap%   $icon\")\"";
                     font_size = 14;
-                    position = "-30, 30";
+                    position = "-15, -15";
                     halign = "right";
-                    valign = "bottom";
+                    valign = "top";
                     color = c.base05;
                 }
             ];
