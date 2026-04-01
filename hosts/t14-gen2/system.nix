@@ -18,6 +18,7 @@ config = {
 
     # Enable & Configure Modules
     modules.core = {
+        bootloader.useGrub = true;
         audio.monoPlayback.enable = true;
     };
 
