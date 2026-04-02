@@ -1,4 +1,4 @@
-{ config, hmConfig, lib, pkgs, user, ... }: let
+{ config, hmConfig, lib, pkgs, ... }: let
     hostOption = config.host.system;
 in {
     
@@ -10,14 +10,15 @@ in {
 
 config = {
 
-    # Set Host Options
+    #--- Host Options ---------------------------
     host.system = {
         hostname = "nix-btw";
         hasBattery = true;
     };
 
-    # Enable & Configure Modules
-    modules.core = {
+
+    #--- Modules --------------------------------
+    core = {
         bootloader.useGrub = true;
         audio.monoPlayback.enable = true;
     };
@@ -28,7 +29,6 @@ config = {
             wifi.enable = true;
             bluetooth.enable = true;
         };
-        shell.zsh.enable = true;
         boot = {
             tuigreet.enable = true;
             swap.enable = true;
@@ -61,10 +61,8 @@ config = {
             };
         };
     };
-	
-#--------------------------------------------------------------------
-    users.users.${user} = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" "power" ];
-    };
+
+
+    #--- Options --------------------------------
+
 };}

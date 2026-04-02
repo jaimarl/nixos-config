@@ -1,4 +1,4 @@
-{ pkgs, stable, user, ... }: {
+{ pkgs, stable, ... }: {
 
     environment.systemPackages = with pkgs; [
         # CLI Utils

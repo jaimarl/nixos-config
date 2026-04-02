@@ -1,15 +1,25 @@
-{ config, hmConfig, lib, pkgs, stateVersion, user, ... }: let
+{ config, hmConfig, lib, pkgs, stateVersion, ... }: let
     hostOption = config.host.system;
 in {
 
     imports = [
-        ./imports/host-options.nix
         ./imports/packages-system.nix
         ./imports/services.nix
-        ../modules/core/system
+        ../core/system
         ../modules/system
     ];
 
+#--- [ Host Options ] -----------------------------------------------
+options.host.system = {
+    hostname = lib.mkOption { type = lib.types.str; default = "nixos"; };
+    locale = lib.mkOption { type = lib.types.str; default = "ru_RU.UTF-8"; };
+    timeZone = lib.mkOption { type = lib.types.str; default = "Europe/Moscow"; };
+
+    hasBattery = lib.mkOption { type = lib.types.bool; default = false; };
+};
+
+
+#--- [ Config ] -----------------------------------------------------
 config = {
 
     console = {
@@ -23,8 +33,6 @@ config = {
     i18n.defaultLocale = hostOption.locale;
 
 #--------------------------------------------------------------------
-    _module.args.hmConfig = config.home-manager.users.${user};
-    
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     system.stateVersion = stateVersion;
 };}

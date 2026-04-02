@@ -30,14 +30,6 @@ if ! grep -q "\"$HOST\" = " "$CONFIG/flake.nix"; then
     exit 1
 fi
 
-# Get username of host user
-HOST_USER=$(grep -A 1 "\"$HOST\" = " "$CONFIG/flake.nix" | grep "user = " | sed -E 's/.*user = "([^"]+)".*/\1/')
-if [ -z "$HOST_USER" ]; then
-    echo "ERROR: Unable to get user for host \"$HOST\" in $CONFIG/flake.nix"
-    exit 1
-fi
-HOME="/mnt/home/$HOST_USER"
-
 
 #---[ Partitioning ]---------------------------------------------------------------------
 # Define the used disko.nix
@@ -90,7 +82,7 @@ sudo rm -rf /mnt/etc/nixos
 echo -e "\nInstalling System..."
 sudo nixos-install --flake "$CONFIG"/#"$HOST"
 
-# Copy config to /home
-sudo cp -ra "$CONFIG" "$HOME"/.nixos
+# Copy config to /mnt/nixos
+sudo cp -ra "$CONFIG" /mnt/nixos
 
 echo "Time elapsed: $(($SECONDS / 3600))h, $(($SECONDS %3600 / 60))m, $(($SECONDS % 60))s"

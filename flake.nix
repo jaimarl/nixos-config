@@ -27,38 +27,59 @@
     outputs = { nixpkgs, nixpkgs-stable, home-manager, nixcord, stylix, spicetify-nix, apple-fonts, ... } @ inputs:
         let
             hosts = {
-                "t14-gen2" = { stateVersion = "25.11"; user = "jaimarl"; };
+                "t14-gen2" = { stateVersion = "25.11"; };
             };
 
-            mkHost = { host, stateVersion, user, system ? "x86_64-linux" }: let
+            mkHost = { host, stateVersion, system ? "x86_64-linux" }: let
                 pkgsCfg = ./hosts/${host}/imports/packages-config.nix;
                 stable = import nixpkgs-stable { inherit system; config = (import pkgsCfg).nixpkgs.config; };
+                
+                usersDir = ./hosts/${host}/users;
+                users = if builtins.pathExists usersDir 
+                        then builtins.attrNames (nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir usersDir)) 
+                        else [];
+
+                hmUsers = nixpkgs.lib.genAttrs users (user: {
+                    imports = [
+                        pkgsCfg 
+                        ./common/home.nix
+                        ./hosts/${host}/home.nix
+                        nixcord.homeModules.nixcord
+                        stylix.homeModules.stylix
+                        spicetify-nix.homeManagerModules.default 
+                        ./hosts/${host}/users/${user}/home.nix
+                        ./hosts/${host}/users/${user}/packages.nix
+                    ];
+                    home.username = user;
+                    home.homeDirectory = "/home/${user}";
+                    home.stateVersion = stateVersion;
+                });
+
+                userSystemModules = map (user: { pkgs, ... }: {
+                    users.users.${user} = {
+                        isNormalUser = true;
+                    } // (import ./hosts/${host}/users/${user}/default.nix { inherit pkgs; });
+                }) users;
+
             in nixpkgs.lib.nixosSystem {
                 inherit system;
-                specialArgs = { inherit inputs stable host stateVersion user; };
+                specialArgs = { inherit inputs stable host stateVersion users; }; 
                 modules = [
                     pkgsCfg 
                     ./common/system.nix
                     ./hosts/${host}/system.nix
+                    
                     home-manager.nixosModules.home-manager {
-                        home-manager.extraSpecialArgs = { inherit inputs stable host stateVersion user; };
-                        home-manager.users.${user} = { imports = [
-                            pkgsCfg 
-                            ./common/home.nix
-                            ./hosts/${host}/home.nix
-                            nixcord.homeModules.nixcord
-                            stylix.homeModules.stylix
-                            spicetify-nix.homeManagerModules.default 
-                        ];};
+                        home-manager.extraSpecialArgs = { inherit inputs stable host stateVersion users; };
+                        home-manager.users = hmUsers;
                     }
-                ];
-            }; 
+                ] ++ userSystemModules;
+            };
         in {
-        
         nixosConfigurations = nixpkgs.lib.mapAttrs (hostname: params:
             mkHost {
                 host = hostname;
-                inherit (params) stateVersion user;
+                inherit (params) stateVersion;
             }
         ) hosts;
     };

@@ -1,9 +1,9 @@
 { config, lib, inputs, pkgs, ... }: let
-    option = config.modules.core.stylix;
+    option = config.core.stylix;
 in {
 
 #--- [ Options ] ----------------------------------------------------
-options.modules.core.stylix = {
+options.core.stylix = {
     flavor = lib.mkOption { type = lib.types.str; default = "macchiato"; };
 
     cursor = {

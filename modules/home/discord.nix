@@ -1,6 +1,6 @@
 { config, lib, ... }: let
     option = config.modules.home.discord;
-    stylix = config.modules.core.stylix;
+    stylix = config.core.stylix;
 in {
 
 #--- [ Options ] ----------------------------------------------------

@@ -1,9 +1,9 @@
 { config, lib, ... }: let
-    option = config.modules.core.graphics;
+    option = config.core.graphics;
 in {
 
 #--- [ Options ] ----------------------------------------------------
-options.modules.core.graphics = {
+options.core.graphics = {
     nvidia.enable = lib.mkOption { type = lib.types.bool; default = false; };
 };
 

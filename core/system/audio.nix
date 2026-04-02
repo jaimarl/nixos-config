@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }: let
-    option = config.modules.core.audio;
+    option = config.core.audio;
 in {
 
 #--- [ Options ] ----------------------------------------------------
-options.modules.core.audio = {
+options.core.audio = {
     monoPlayback.enable = lib.mkOption { type = lib.types.bool; default = false; };
 };
 

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, user, ... }: let
+{ config, lib, pkgs, ... }: let
     option = config.modules.system.steam;
 in {
 

@@ -9,8 +9,6 @@
         ./hardware/bluetooth.nix
         ./hardware/wifi.nix
 
-        ./shell/zsh.nix
-
         ./steam.nix
         ./virtualisation.nix
     ];

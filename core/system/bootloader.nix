@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }: let
-    option = config.modules.core.bootloader;
+    option = config.core.bootloader;
 in {
 
 #--- [ Options ] ----------------------------------------------------
-options.modules.core.bootloader = {
+options.core.bootloader = {
     useGrub = lib.mkOption { type = lib.types.bool; default = false; };
 };
 

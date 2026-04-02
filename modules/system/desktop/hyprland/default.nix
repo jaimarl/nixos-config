@@ -1,4 +1,4 @@
-{ config, lib, inputs, pkgs, user, ... }: let
+{ config, lib, inputs, pkgs, ... }: let
     option = config.modules.system.desktop.hyprland;
 in {
 

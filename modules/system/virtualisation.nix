@@ -1,4 +1,4 @@
-{ config, lib, pkgs, user, ... }: let
+{ config, lib, pkgs, users, ... }: let
     option = config.modules.system.virtualisation;
 in {
 
@@ -34,6 +34,8 @@ config = lib.mkIf option.enable {
 
     programs.virt-manager.enable = true;
 
-    users.users.${user}.extraGroups = [ "libvirtd" ];
+    users.users = lib.genAttrs users (name: {
+        extraGroups = [ "libvirtd" ];
+    });
 
 };}

@@ -1,6 +1,6 @@
 { inputs, config, lib, pkgs, ... }: let
     option = config.modules.home.spotify;
-    stylix = config.modules.core.stylix;
+    stylix = config.core.stylix;
     spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
 
