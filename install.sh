@@ -82,7 +82,7 @@ sudo rm -rf /mnt/etc/nixos
 echo -e "\nInstalling System..."
 sudo nixos-install --flake "$CONFIG"/#"$HOST"
 
-# Copy config to /mnt/nixos
-sudo cp -ra "$CONFIG" /mnt/nixos
+# Copy config to /mnt/etc/nixos
+sudo cp -ra "$CONFIG" /mnt/etc/nixos
 
 echo "Time elapsed: $(($SECONDS / 3600))h, $(($SECONDS %3600 / 60))m, $(($SECONDS % 60))s"
