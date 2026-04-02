@@ -24,7 +24,7 @@ options.modules.system.desktop.hyprland = {
         kbdDevice = lib.mkOption { type = lib.types.str; default = ""; };
 
         timeouts = {
-            lock = lib.mkOption { type = lib.types.int; default = 660; };
+            lock = lib.mkOption { type = lib.types.int; default = 600; };
             offScreen = lib.mkOption { type = lib.types.int; default = 900; };
             suspend = lib.mkOption { type = lib.types.int; default = 1500; };
         };
@@ -55,13 +55,7 @@ config = lib.mkIf option.enable {
 
     modules.system.boot.tuigreet.cmd = lib.mkDefault "start-hyprland";
 
-    nix.settings = {
-        substituters = ["https://hyprland.cachix.org"];
-        trusted-substituters = ["https://hyprland.cachix.org"];
-        trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-    };
-
-home-manager.users.${user} = {
+home-manager.sharedModules = [{
 
     imports = [
         ./config/appearance.nix
@@ -102,7 +96,7 @@ home-manager.users.${user} = {
                 background_color = lib.mkForce "rgb(000000)";
             };
             debug = {
-                suppress_errors = ! option.showErrors;
+                suppress_errors = !option.showErrors;
             };
         } option.extraConfig;
 
@@ -112,4 +106,4 @@ home-manager.users.${user} = {
 
     modules.home.firefox.hideNavigation = true;
 
-};};}
+}];};}

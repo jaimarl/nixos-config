@@ -8,7 +8,7 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        hyprland.url = "github:hyprwm/Hyprland/v0.54.1";
+        hyprland.url = "github:hyprwm/Hyprland/v0.54.3";
         hyprsplit = {
             url = "github:shezdy/hyprsplit";
             inputs.hyprland.follows = "hyprland";

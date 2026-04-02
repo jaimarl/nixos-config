@@ -5,7 +5,7 @@
         name = "wp";
         runtimeInputs = with pkgs; [
             coreutils findutils
-            swww
+            awww
             fzf
             chafa
         ];
@@ -28,10 +28,13 @@
                         CURRENT_WALL=$(readlink "$CACHE/current.png")
                     fi
 
-                    RANDOM_WALL=$(find "$WALL_DIR" -type f \
-                        | grep -E "\.(jpg|jpeg|png|webp|gif)$" \
-                        | grep -vF "$CURRENT_WALL" \
-                        | shuf -n 1)
+                    ALL_WALLS=$(find "$WALL_DIR" -type f | grep -E "\.(jpg|jpeg|png|webp|gif)$")
+                    
+                    if [ -n "$CURRENT_WALL" ]; then
+                        RANDOM_WALL=$(echo "$ALL_WALLS" | grep -vF "$CURRENT_WALL" | shuf -n 1)
+                    else
+                        RANDOM_WALL=$(echo "$ALL_WALLS" | shuf -n 1)
+                    fi
 
                     if [ -n "$RANDOM_WALL" ]; then
                         WALLPAPER="$RANDOM_WALL"
@@ -58,14 +61,15 @@
                     ;;
             esac
 
-            if [[ -z $(pgrep swww-daemon) ]]; then
-                swww-daemon &
+            if [[ -z $(pgrep awww-daemon) ]]; then
+                awww-daemon --no-cache &
             fi
 
             ABS_PATH=$(realpath "$WALLPAPER")
 
+            mkdir -p "$CACHE"
             ln -sf "$ABS_PATH" "$CACHE/current.png"
-            swww img "$ABS_PATH" \
+            awww img "$ABS_PATH" \
                 --transition-type grow \
                 --transition-pos 0.5,${toString (if option.waybar.position == "top" then 0.99 else 0)} \
                 --transition-step 90 \

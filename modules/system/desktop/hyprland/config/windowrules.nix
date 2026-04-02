@@ -14,8 +14,7 @@ config = {
         windowrule = [
             # Floating Windows
             "float 1, fullscreen_state 0, size $mw:0.66 $mh:0.66, $?:class (org.telegram.desktop), $?:title (Просмотр медиа)"
-            "center 1, size $mw:0.6 $mh:0.75, $?:class (firefox), $?:float 1"
-            
+            "float 1, center 1, size $mw:0.6 $mh:0.75, $?:class (xdg-desktop-portal-gtk)"
             "float 1, size $mw:0.66 $mh:0.66, $?:class (org.gnome.eog)"
 
             # Picture In Picture
@@ -26,7 +25,6 @@ config = {
             "float 1, center 1, size $mw:0.66 $mh:0.66, $?:class (steam), $?:title (Steam — браузер)"
             "float 1, center 1, size $mw:0.25 $mh:0.75, $?:class (steam), $?:title (Список друзей)"
             "float 1, center 1, size $mw:0.45 $mh:0.66, $?:class (steam), $?:title (Добавить стороннюю игру)"
-            "float 1, center 1, size $mw:0.6 $mh:0.75, $?:class (xdg-desktop-portal-gtk), $?:title (Выберите и добавьте игру)"
 
             # Other
             "suppress_event maximize"
