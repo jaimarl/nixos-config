@@ -23,6 +23,9 @@ config = lib.mkIf option.enable {
             qemu = {
                 package = pkgs.qemu_kvm;
                 swtpm.enable = true;
+                verbatimConfig = ''
+                    display_gl = "on"
+                '';
             };
             extraConfig = ''
                 unix_sock_group = "libvirtd"
@@ -31,6 +34,11 @@ config = lib.mkIf option.enable {
         };
         spiceUSBRedirection.enable = true;
     };
+
+    networking.firewall.checkReversePath = "loose"; # Важно для корректной работы NAT в виртуалках
+    networking.firewall.trustedInterfaces = [ "virbr0" ];
+
+    services.spice-vdagentd.enable = true;
 
     programs.virt-manager.enable = true;
 

@@ -12,20 +12,17 @@ config = {
 
     #--- Host Options ---------------------------
     host.system = {
-        hostname = "nix-btw";
-        hasBattery = true;
+        hostname = "nix-home";
     };
 
 
     #--- Modules --------------------------------
     core = {
-        bootloader.useGrub = true;
         audio.monoPlayback.enable = true;
     };
 
     modules.system = {
         steam.enable = true;
-        virtualisation.enable = true;
         hardware = {
             wifi.enable = true;
             bluetooth.enable = true;
@@ -37,28 +34,14 @@ config = {
         };
         desktop.hyprland = {
             enable = true;
-            opacity.enable = false;
 
-            monitors = [ "eDP-1, 1920x1080@60, 0x0, 1" ];
-            hypridle.kbdDevice = "tpacpi::kbd_backlight";
-            record.codec = "hevc_vaapi";
+            monitors = [ "DP-3, 1920x1080@144, 0x0, 1" "HDMI-A-1, 1920x1080@60, 1920x0, 1" ];
+            record.codec = "h264_nvenc";
 
             extraConfig = {
                 general = {
                     layout = "master";
                 };
-
-                bind = [
-                    ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-                    ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-                ];
-                binde = [
-                    ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
-                    ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 2%+"
-
-                    ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
-                    ", XF86MonBrightnessUp, exec, brightnessctl s 5%+"
-                ];
             };
         };
     };
