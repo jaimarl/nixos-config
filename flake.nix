@@ -26,14 +26,19 @@
 
     outputs = { nixpkgs, nixpkgs-stable, home-manager, nixcord, stylix, spicetify-nix, apple-fonts, ... } @ inputs:
         let
-            hosts = {
-                "t14-gen2" = { stateVersion = "25.11"; };
-            };
+            hostsDir = ./hosts;
+            hostDirs = builtins.attrNames (
+                nixpkgs.lib.filterAttrs (n: v: v == "directory" && n != ".template") (builtins.readDir hostsDir)
+            );
+
+            hosts = nixpkgs.lib.genAttrs hostDirs (host: {
+                stateVersion = import ./hosts/${host}/state-version.nix;
+            });
 
             mkHost = { host, stateVersion, system ? "x86_64-linux" }: let
                 pkgsCfg = ./hosts/${host}/imports/packages-config.nix;
                 stable = import nixpkgs-stable { inherit system; config = (import pkgsCfg).nixpkgs.config; };
-                
+
                 usersDir = ./hosts/${host}/users;
                 users = if builtins.pathExists usersDir 
                         then builtins.attrNames (nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir usersDir)) 

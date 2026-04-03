@@ -25,11 +25,6 @@ if [ ! -d "$CONFIG/hosts/$HOST" ]; then
     exit 1
 fi
 
-if ! grep -q "\"$HOST\" = " "$CONFIG/flake.nix"; then
-    echo "ERROR: Host \"$HOST\" is not defined in $CONFIG/flake.nix"
-    exit 1
-fi
-
 
 #---[ Partitioning ]---------------------------------------------------------------------
 # Define the used disko.nix
