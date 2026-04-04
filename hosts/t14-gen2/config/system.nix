@@ -26,6 +26,10 @@ config = {
     modules.system = {
         steam.enable = true;
         virtualisation.enable = true;
+        zapret = {
+            enable = true;
+            strategy = "general(ALT)";
+        };
         hardware = {
             wifi.enable = true;
             bluetooth.enable = true;
@@ -47,7 +51,9 @@ config = {
                 general = {
                     layout = "master";
                 };
-
+                windowrule = [
+                    "workspace 9, match:class (spotify)"
+                ];
                 bind = [
                     ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
                     ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
@@ -58,6 +64,11 @@ config = {
 
                     ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
                     ", XF86MonBrightnessUp, exec, brightnessctl s 5%+"
+
+                    "Super, Backslash, togglespecialworkspace, surge"
+                ];
+                exec-once = [
+                    "[workspace special:surge silent] kitty surge"
                 ];
             };
         };

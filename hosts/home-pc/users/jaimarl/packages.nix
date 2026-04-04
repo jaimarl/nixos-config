@@ -1,27 +1,23 @@
 { pkgs, stable, ... }: {
 
     home.packages = with pkgs; [
-        # CLI Utils
         ripgrep
+        android-tools
         gowall
 
-        # TUI Utils
         surge-dm
 
-        # GUI Apps
         qbittorrent
         telegram-desktop
         eog
         prismlauncher
         heroic
 
-        # Yazi Requirements 
         p7zip
         mediainfo
         trash-cli
         wl-clipboard
 
-        # Neovim
         neovim
         luajitPackages.luarocks_bootstrap
         tree-sitter
@@ -32,12 +28,10 @@
     ];
 
     programs = {
-        # CLI Utils
         fzf.enable = true;
         eza.enable = true;
         bat.enable = true;
 
-        # TUI Utils
         btop.enable = true;
         yazi.enable = true;
     };
