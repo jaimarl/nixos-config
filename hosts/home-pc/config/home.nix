@@ -1,7 +1,7 @@
 { config, osConfig, lib, pkgs, stateVersion, ... }: {
 
     imports = [
-        ./imports/packages-home.nix
+        ./packages-home.nix
     ];
     
 config = {

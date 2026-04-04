@@ -5,10 +5,15 @@
         ripgrep
         gowall
 
+        # TUI Utils
+        surge-dm
+
         # GUI Apps
         qbittorrent
         telegram-desktop
         eog
+        prismlauncher
+        heroic
 
         # Yazi Requirements 
         p7zip

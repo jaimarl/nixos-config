@@ -27,6 +27,7 @@ config = {
                 "fadeDim, 1, 10, default"
                 "fadeLayers, 1, 10, default"
                 "workspaces, 1, 4, overshot, slide"
+                "specialWorkspace, 1, 4, overshot, slidevert"
                 "border, 1, 1, liner"
                 "borderangle, 1, 30, liner, loop"
             ];

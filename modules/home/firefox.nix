@@ -116,6 +116,10 @@ config = lib.mkIf option.enable {
                     install_url = mkUrl "frankerfacez";
                     installation_mode = "normal_installed";
                 };
+                "surge@surge-downloader.com" = {
+                    install_url = mkUrl "surge";
+                    installation_mode = "normal_installed";
+                };
                 # Firefox Color
                 "FirefoxColor@mozilla.com" = {
                     install_url = mkUrl "firefox-color";

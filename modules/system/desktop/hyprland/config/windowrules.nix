@@ -15,6 +15,7 @@ config = {
             # Floating Windows
             "float 1, fullscreen_state 0, size $mw:0.66 $mh:0.66, $?:class (org.telegram.desktop), $?:title (Просмотр медиа)"
             "float 1, center 1, size $mw:0.6 $mh:0.75, $?:class (xdg-desktop-portal-gtk)"
+            "float 1, center 1, size $mw:0.66 $mh:0.66, $?:class (Minecraft.*)"
             "float 1, size $mw:0.66 $mh:0.66, $?:class (org.gnome.eog)"
 
             # Picture In Picture

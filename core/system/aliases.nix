@@ -12,6 +12,8 @@ config = {
         nclean = "sudo nix-collect-garbage && nix-store --optimize";
         nlistgen = "nixos-rebuild list-generations";
         ndelgen = "sudo nix-collect-garbage -d && nswitch";
+
+        ncd = "cd /etc/nixos/";
     };
 
 };}

@@ -11,5 +11,6 @@
 
         ./steam.nix
         ./virtualisation.nix
+        ./zapret.nix
     ];
 }

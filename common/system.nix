@@ -3,8 +3,8 @@
 in {
 
     imports = [
-        ./imports/packages-system.nix
-        ./imports/services.nix
+        ./packages-system.nix
+        ./services.nix
         ../core/system
         ../modules/system
     ];
@@ -35,4 +35,6 @@ config = {
 #--------------------------------------------------------------------
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     system.stateVersion = stateVersion;
+
+    nixpkgs.overlays = [ (import ../pkgs) ];
 };}

@@ -1,7 +1,7 @@
 { config, osConfig, lib, pkgs, stateVersion, ... }: {
 
     imports = [
-        ./imports/packages-home.nix
+        ./packages-home.nix
         ../core/home/stylix.nix
         ../modules/home
     ];
@@ -22,4 +22,6 @@ config = {
 
     # Options
 
+#--------------------------------------------------------------------
+    nixpkgs.overlays = [ (import ../pkgs) ];
 };}

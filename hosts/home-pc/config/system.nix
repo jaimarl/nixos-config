@@ -3,9 +3,9 @@
 in {
     
     imports = [
-        ./hardware.nix
-        ./imports/packages-system.nix
-        ./imports/services.nix
+        ../hardware.nix
+        ./packages-system.nix
+        ./services.nix
     ];
 
 config = {
@@ -19,10 +19,16 @@ config = {
     #--- Modules --------------------------------
     core = {
         audio.monoPlayback.enable = true;
+        bootloader.useGrub = true;
+        graphics.nvidia.enable = true;
     };
 
     modules.system = {
         steam.enable = true;
+        zapret = {
+            enable = true;
+            strategy = "general(ALT)";
+        };
         hardware = {
             wifi.enable = true;
             bluetooth.enable = true;
@@ -34,6 +40,7 @@ config = {
         };
         desktop.hyprland = {
             enable = true;
+            hypridle.enable = false;
 
             monitors = [ "DP-3, 1920x1080@144, 0x0, 1" "HDMI-A-1, 1920x1080@60, 1920x0, 1" ];
             record.codec = "h264_nvenc";
@@ -42,6 +49,15 @@ config = {
                 general = {
                     layout = "master";
                 };
+                windowrule = [
+                    "workspace 9, match:class (spotify)"
+                ];
+                bind = [
+                    "Super, Backslash, togglespecialworkspace, surge"
+                ];
+                exec-once = [
+                    "[workspace special:surge silent] kitty surge"
+                ];
             };
         };
     };

@@ -3,9 +3,9 @@
 in {
     
     imports = [
-        ./hardware.nix
-        ./imports/packages-system.nix
-        ./imports/services.nix
+        ../hardware.nix
+        ./packages-system.nix
+        ./services.nix
     ];
 
 config = {

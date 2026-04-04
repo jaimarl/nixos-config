@@ -123,6 +123,20 @@
             hyprctl dispatch centerwindow
         fi
     '';
+
+    special = pkgs.writeShellApplication {
+        name = "close";
+        runtimeInputs = with pkgs; [
+            jq
+        ];
+        text = ''
+            active=$(hyprctl -j monitors | jq --raw-output '.[] | select(.focused==true).specialWorkspace.name | split(":") | if length > 1 then .[1] else "" end')
+
+            if [[ ''${#active} -gt 0 ]]; then
+                hyprctl dispatch togglespecialworkspace "$active"
+            fi
+        '';
+    };
 in {
 
 #--- [ Config ] -----------------------------------------------------
@@ -139,6 +153,7 @@ config = {
             "Super, Grave, exec, kitty nvim"
             "Super, B, exec, firefox"
             "Super Shift, B, exec, firefox --private-window"
+            "Super, C, exec, spotify"
 
             # Screen
             "Super Shift, S, exec, ${screenshot}/bin/screenshot region"
@@ -167,10 +182,10 @@ config = {
             "Super, up, movefocus, u"
             "Super, down, movefocus, d"
 
-            "Super Shift, left, swapwindow, l"
-            "Super Shift, right, swapwindow, r"
-            "Super Shift, up, swapwindow, u"
-            "Super Shift, down, swapwindow, d"
+            "Super Shift, left, movewindow, l"
+            "Super Shift, right, movewindow, r"
+            "Super Shift, up, movewindow, u"
+            "Super Shift, down, movewindow, d"
 
             # Workspaces
             "Super, 1, split:workspace, 1"
@@ -192,6 +207,11 @@ config = {
             "Super Shift, 7, split:movetoworkspacesilent, 7"
             "Super Shift, 8, split:movetoworkspacesilent, 8"
             "Super Shift, 9, split:movetoworkspacesilent, 9"
+
+            # Special Workspaces
+            "Super, Escape, exec, ${special}/bin/close"
+            "Super, X, togglespecialworkspace, scratch"
+            "Super Shift, X, movetoworkspacesilent, scratch"
         ];
 
         bindm = [

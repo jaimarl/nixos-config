@@ -88,7 +88,7 @@ config = {
             "mpris#play" = {
                 format = "󰏤";
                 format-paused = "󰐊";
-                on-click = "playerctl -p spotify play-pause";
+                on-click = "${pkgs.playerctl}/bin/playerctl -p spotify play-pause";
                 on-click-right = "";
                 on-click-middle = "";
                 player = "spotify";
@@ -96,7 +96,7 @@ config = {
             };
             "mpris#prev" = {
                 format = "󰒮";
-                on-click = "playerctl -p spotify previous";
+                on-click = "${pkgs.playerctl}/bin/playerctl -p spotify previous";
                 on-click-right = "";
                 on-click-middle = "";
                 player = "spotify";
@@ -104,7 +104,7 @@ config = {
             };
             "mpris#next" = {
                 format = "󰒭";
-                on-click = "playerctl -p spotify next";
+                on-click = "${pkgs.playerctl}/bin/playerctl -p spotify next";
                 on-click-right = "";
                 on-click-middle = "";
                 player = "spotify";

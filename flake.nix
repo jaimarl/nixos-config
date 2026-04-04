@@ -22,9 +22,11 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
         apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
+
+        zapret-discord-youtube.url = "github:kartavkun/zapret-discord-youtube";
     };
 
-    outputs = { nixpkgs, nixpkgs-stable, home-manager, nixcord, stylix, spicetify-nix, apple-fonts, ... } @ inputs:
+    outputs = { nixpkgs, nixpkgs-stable, home-manager, nixcord, stylix, spicetify-nix, apple-fonts, zapret-discord-youtube, ... } @ inputs:
         let
             hostsDir = ./hosts;
             hostDirs = builtins.attrNames (
@@ -36,7 +38,7 @@
             });
 
             mkHost = { host, stateVersion, system ? "x86_64-linux" }: let
-                pkgsCfg = ./hosts/${host}/imports/packages-config.nix;
+                pkgsCfg = ./hosts/${host}/config/packages-config.nix;
                 stable = import nixpkgs-stable { inherit system; config = (import pkgsCfg).nixpkgs.config; };
 
                 usersDir = ./hosts/${host}/users;
@@ -48,7 +50,7 @@
                     imports = [
                         pkgsCfg 
                         ./common/home.nix
-                        ./hosts/${host}/home.nix
+                        ./hosts/${host}/config/home.nix
                         nixcord.homeModules.nixcord
                         stylix.homeModules.stylix
                         spicetify-nix.homeManagerModules.default 
@@ -61,6 +63,7 @@
                 });
 
                 userSystemModules = map (user: { pkgs, ... }: {
+                    imports = [ zapret-discord-youtube.nixosModules.default ];
                     users.users.${user} = {
                         isNormalUser = true;
                     } // (import ./hosts/${host}/users/${user}/default.nix { inherit pkgs; });
@@ -72,7 +75,7 @@
                 modules = [
                     pkgsCfg 
                     ./common/system.nix
-                    ./hosts/${host}/system.nix
+                    ./hosts/${host}/config/system.nix
                     
                     home-manager.nixosModules.home-manager {
                         home-manager.extraSpecialArgs = { inherit inputs stable host stateVersion users; };

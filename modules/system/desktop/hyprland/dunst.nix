@@ -24,6 +24,7 @@ config = {
                 frame_width = 1;
                 corner_radius = 5;
                 max_icon_size = 64;
+                icon_corner_radius = 5;
                 gap_size = 5;
                 padding = 8;
                 horizontal_padding = 8;
