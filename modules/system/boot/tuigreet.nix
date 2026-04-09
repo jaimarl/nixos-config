@@ -6,7 +6,7 @@ in {
 options.modules.system.boot.tuigreet = {
     enable = lib.mkOption { type = lib.types.bool; default = false; };
 
-    cmd = lib.mkOption { type = lib.types.str; default = "zsh"; };
+    cmd = lib.mkOption { type = lib.types.str; default = "bash"; };
 };
 
 

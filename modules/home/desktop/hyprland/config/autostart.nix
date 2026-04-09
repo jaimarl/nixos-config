@@ -1,5 +1,5 @@
 { config, osConfig, lib, pkgs, ... }: let
-    option = osConfig.modules.system.desktop.hyprland;
+    option = config.modules.home.desktop.hyprland;
     stylix = config.core.stylix;
 
     awww = pkgs.writeShellScript "start" ''

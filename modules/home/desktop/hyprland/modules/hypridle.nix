@@ -1,6 +1,6 @@
 { config, osConfig, lib, ... }: 
 let
-    option = osConfig.modules.system.desktop.hyprland;
+    option = config.modules.home.desktop.hyprland;
     
     runCmd = cmd: if (option.hypridle.onBatteryOnly)
         then "grep -q 'Discharging' /sys/class/power_supply/BAT*/status && ${cmd}" 

@@ -1,12 +1,18 @@
 { config, osConfig, lib, pkgs, ... }: let
-    option = osConfig.modules.system.desktop.hyprland;
+    option = config.modules.home.dunst;
 
     colors = config.lib.stylix.colors.withHashtag;
     fonts = config.stylix.fonts;
 in {
 
+#--- [ Options ] ----------------------------------------------------
+options.modules.home.dunst = {
+    enable = lib.mkOption { type = lib.types.bool; default = false; };
+};
+
+
 #--- [ Config ] -----------------------------------------------------
-config = { 
+config = lib.mkIf option.enable { 
     
     services.dunst = {
         enable = true;
@@ -14,6 +20,7 @@ config = {
             global = {
                 width = 500;
                 height = 80;
+                follow = "mouse";
                 offset = "6x6";
                 fullscreen = "pushback";
               
@@ -23,8 +30,9 @@ config = {
 
                 frame_width = 1;
                 corner_radius = 5;
-                max_icon_size = 64;
                 icon_corner_radius = 5;
+                min_icon_size = 64;
+                max_icon_size = 64;
                 gap_size = 5;
                 padding = 8;
                 horizontal_padding = 8;

@@ -4,6 +4,7 @@
 
     environment.systemPackages = with pkgs; [
         nvtopPackages.amd 
+        brightnessctl
     ];
 
     programs = {

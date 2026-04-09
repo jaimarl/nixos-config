@@ -1,5 +1,5 @@
 { config, osConfig, lib, ... }: let
-    option = osConfig.modules.system.desktop.hyprland;
+    option = config.modules.home.desktop.hyprland;
 in {
 
 #--- [ Config ] -----------------------------------------------------

@@ -1,6 +1,6 @@
 { pkgs
-, version ? "0.7.7"
-, sha256 ? "sha256:6afcd69b24e80c094099a67b8e4bf31e853663c148cc99127d7345e49536ad17"
+, version ? "0.7.8"
+, sha256 ? "sha256:9c6bad3ae307239012ef421058ff5c8dc565c35ad51629cac363ae72568a769a"
 }:
 
 pkgs.stdenv.mkDerivation rec {

@@ -1,9 +1,27 @@
 { config, lib, inputs, pkgs, ... }: let
-    option = config.modules.system.desktop.hyprland;
+    option = config.modules.home.desktop.hyprland;
 in {
 
+    imports = [
+        ./config/appearance.nix
+        ./config/autostart.nix
+        ./config/binds.nix
+        ./config/other.nix
+        ./config/windowrules.nix
+
+        ./modules/animations.nix
+        ./modules/hypridle.nix
+        ./modules/opacity.nix
+
+        ./scripts/wallpaper.nix
+
+        ./waybar
+        ./pyprland.nix
+        ./hyprlock.nix
+    ];
+
 #--- [ Options ] ----------------------------------------------------
-options.modules.system.desktop.hyprland = {
+options.modules.home.desktop.hyprland = {
     enable = lib.mkOption { type = lib.types.bool; default = false; };
 
     monitors = lib.mkOption { type = lib.types.listOf lib.types.str; default = []; };
@@ -47,35 +65,6 @@ options.modules.system.desktop.hyprland = {
 #--- [ Config ] -----------------------------------------------------
 config = lib.mkIf option.enable {
 
-    programs.hyprland = {
-        enable = true;
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    };
-
-    modules.system.boot.tuigreet.cmd = lib.mkDefault "start-hyprland";
-
-home-manager.sharedModules = [{
-
-    imports = [
-        ./config/appearance.nix
-        ./config/autostart.nix
-        ./config/binds.nix
-        ./config/other.nix
-        ./config/windowrules.nix
-
-        ./modules/animations.nix
-        ./modules/hypridle.nix
-        ./modules/opacity.nix
-
-        ./scripts/wallpaper.nix
-
-        ./waybar
-        ./dunst.nix
-        ./pyprland.nix
-        ./hyprlock.nix
-    ];
-
     wayland.windowManager.hyprland = {
         enable = true;
 
@@ -106,4 +95,4 @@ home-manager.sharedModules = [{
 
     modules.home.firefox.hideNavigation = true;
 
-}];};}
+};}

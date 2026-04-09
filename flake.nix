@@ -63,10 +63,9 @@
                 });
 
                 userSystemModules = map (user: { pkgs, ... }: {
-                    imports = [ zapret-discord-youtube.nixosModules.default ];
                     users.users.${user} = {
                         isNormalUser = true;
-                    } // (import ./hosts/${host}/users/${user}/default.nix { inherit pkgs; });
+                    } // (import ./hosts/${host}/users/${user} { inherit pkgs; });
                 }) users;
 
             in nixpkgs.lib.nixosSystem {
@@ -76,6 +75,7 @@
                     pkgsCfg 
                     ./common/system.nix
                     ./hosts/${host}/config/system.nix
+                    zapret-discord-youtube.nixosModules.default
                     
                     home-manager.nixosModules.home-manager {
                         home-manager.extraSpecialArgs = { inherit inputs stable host stateVersion users; };

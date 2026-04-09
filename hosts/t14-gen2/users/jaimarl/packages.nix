@@ -5,9 +5,8 @@
         android-tools
         gowall
 
-        surge-dm
-
         qbittorrent
+        surge-dm
         telegram-desktop
         eog
 

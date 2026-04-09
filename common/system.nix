@@ -1,5 +1,10 @@
-{ config, hmConfig, lib, pkgs, stateVersion, ... }: let
+{ config, lib, inputs, pkgs, stateVersion, ... }: let
     hostOption = config.host.system;
+
+    hmUsers = config.home-manager.users;
+    isHyprlandNeeded = lib.any 
+        (cfg: lib.attrByPath [ "wayland" "windowManager" "hyprland" "enable" ] false cfg) 
+        (builtins.attrValues hmUsers);
 in {
 
     imports = [
@@ -22,15 +27,24 @@ options.host.system = {
 #--- [ Config ] -----------------------------------------------------
 config = {
 
+    networking.hostName = hostOption.hostname;
+    time.timeZone = hostOption.timeZone;
+    i18n.defaultLocale = hostOption.locale;
+
     console = {
         font = "ter-p24b";
         earlySetup = true;
         packages = [ pkgs.terminus_font ];
     };
 
-    networking.hostName = hostOption.hostname;
-    time.timeZone = hostOption.timeZone;
-    i18n.defaultLocale = hostOption.locale;
+    # Hyprland System
+    programs.hyprland = {
+        enable = isHyprlandNeeded;
+        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    };
+
+    modules.system.boot.tuigreet = lib.mkIf isHyprlandNeeded { cmd = "start-hyprland"; };
 
 #--------------------------------------------------------------------
     nix.settings.experimental-features = [ "nix-command" "flakes" ];

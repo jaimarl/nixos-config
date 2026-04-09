@@ -4,7 +4,6 @@
         git
         tree
         fastfetch
-        brightnessctl
 
         neovim
         btop
