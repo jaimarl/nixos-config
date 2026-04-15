@@ -32,6 +32,7 @@
                     "workspace 9, match:class (spotify)"
                 ];
                 bind = [
+                    ", XF86AudioMute, exec, ${pkgs.playerctl}/bin/playerctl -p spotify play-pause"
                     "Super, Backslash, togglespecialworkspace, surge"
                 ];
                 exec-once = [

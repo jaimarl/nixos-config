@@ -24,6 +24,8 @@
         lua-language-server
         vscode-langservers-extracted
         marksman
+
+        jdk17_headless
     ];
 
     programs = {
