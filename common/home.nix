@@ -2,7 +2,7 @@
 
     imports = [
         ./packages-home.nix
-        ../core/home/stylix.nix
+        ../core/home
         ../modules/home
     ];
 

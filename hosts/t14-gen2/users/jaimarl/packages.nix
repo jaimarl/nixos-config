@@ -9,6 +9,7 @@
         surge-dm
         telegram-desktop
         eog
+        prismlauncher
 
         p7zip
         mediainfo
@@ -22,6 +23,7 @@
         lua-language-server
         vscode-langservers-extracted
         marksman
+        nixd
     ];
 
     programs = {
