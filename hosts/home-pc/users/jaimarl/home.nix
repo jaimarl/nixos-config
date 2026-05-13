@@ -24,6 +24,10 @@
             monitors = [ "DP-3, 1920x1080@144, 0x0, 1" "HDMI-A-1, 1920x1080@60, 1920x0, 1" ];
             record.codec = "h264_nvenc";
 
+            waybar.workspaceIcons = {
+                "9" = "󰝚";
+            };
+
             extraConfig = {
                 general = {
                     layout = "master";

@@ -54,6 +54,7 @@ options.modules.home.desktop.hyprland = {
         position = lib.mkOption { type = lib.types.str; default = "top"; };
         width = lib.mkOption { type = lib.types.addCheck lib.types.int (v: v == 0 || v >= 1400); default = 0; };
         opacity = lib.mkOption { type = lib.types.bool; default = option.opacity.enable; };
+        workspaceIcons = lib.mkOption { type = lib.types.attrsOf lib.types.str; default = {}; };
     };
 
     record.codec = lib.mkOption { type = lib.types.str; default = "libx264"; };

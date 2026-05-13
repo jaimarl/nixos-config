@@ -1,6 +1,6 @@
 { pkgs, stable, ... }: {
 
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_zen;
 
     environment.systemPackages = with pkgs; [
         nvtopPackages.nvidia

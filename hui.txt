@@ -1,0 +1,60 @@
+(13262) [Sat, 25 Apr 2026 22:01:46] waydroid-net isn't running
+(13262) [Sat, 25 Apr 2026 22:01:46] % systemctl is-enabled -q nfcd
+(14348) [Sat, 25 Apr 2026 22:01:49] % modprobe -q ashmem_linux
+(14348) [Sat, 25 Apr 2026 22:01:49] % chmod 666 -R /dev/binder
+(14348) [Sat, 25 Apr 2026 22:01:49] % chmod 666 -R /dev/vndbinder
+(14348) [Sat, 25 Apr 2026 22:01:49] % chmod 666 -R /dev/hwbinder
+(14348) [Sat, 25 Apr 2026 22:01:49] Starting up container for a new session
+(14348) [Sat, 25 Apr 2026 22:01:49] % /nix/store/dk2slla9b5gq5ngiv3887ilh7r0vj3js-waydroid-1.6.2/lib/waydroid/data/scripts/waydroid-net.sh start
+(14348) [Sat, 25 Apr 2026 22:01:49] vnic is waydroid0
+(14348) [Sat, 25 Apr 2026 22:01:49] modprobe: FATAL: Module ip_tables not found in directory /run/booted-system/kernel-modules/lib/modules/7.0.0
+(14348) [Sat, 25 Apr 2026 22:01:49] iptables v1.8.12 (legacy): can't initialize iptables table `filter': Table does not exist (do you need to insmod?)
+(14348) [Sat, 25 Apr 2026 22:01:49] Perhaps iptables or your kernel needs to be upgraded.
+(14348) [Sat, 25 Apr 2026 22:01:49] Failed to setup waydroid-net.
+(14348) [Sat, 25 Apr 2026 22:01:49] modprobe: FATAL: Module ip_tables not found in directory /run/booted-system/kernel-modules/lib/modules/7.0.0
+(14348) [Sat, 25 Apr 2026 22:01:49] iptables v1.8.12 (legacy): can't initialize iptables table `filter': Table does not exist (do you need to insmod?)
+(14348) [Sat, 25 Apr 2026 22:01:49] Perhaps iptables or your kernel needs to be upgraded.
+(14348) [Sat, 25 Apr 2026 22:01:49] modprobe: FATAL: Module ip_tables not found in directory /run/booted-system/kernel-modules/lib/modules/7.0.0
+(14348) [Sat, 25 Apr 2026 22:01:49] iptables v1.8.12 (legacy): can't initialize iptables table `filter': Table does not exist (do you need to insmod?)
+(14348) [Sat, 25 Apr 2026 22:01:49] Perhaps iptables or your kernel needs to be upgraded.
+(14348) [Sat, 25 Apr 2026 22:01:49] modprobe: FATAL: Module ip_tables not found in directory /run/booted-system/kernel-modules/lib/modules/7.0.0
+(14348) [Sat, 25 Apr 2026 22:01:49] iptables v1.8.12 (legacy): can't initialize iptables table `filter': Table does not exist (do you need to insmod?)
+(14348) [Sat, 25 Apr 2026 22:01:49] Perhaps iptables or your kernel needs to be upgraded.
+(14348) [Sat, 25 Apr 2026 22:01:49] modprobe: FATAL: Module ip_tables not found in directory /run/booted-system/kernel-modules/lib/modules/7.0.0
+(14348) [Sat, 25 Apr 2026 22:01:49] iptables v1.8.12 (legacy): can't initialize iptables table `filter': Table does not exist (do you need to insmod?)
+(14348) [Sat, 25 Apr 2026 22:01:49] Perhaps iptables or your kernel needs to be upgraded.
+(14348) [Sat, 25 Apr 2026 22:01:49] modprobe: FATAL: Module ip_tables not found in directory /run/booted-system/kernel-modules/lib/modules/7.0.0
+(14348) [Sat, 25 Apr 2026 22:01:49] iptables v1.8.12 (legacy): can't initialize iptables table `filter': Table does not exist (do you need to insmod?)
+(14348) [Sat, 25 Apr 2026 22:01:49] Perhaps iptables or your kernel needs to be upgraded.
+(14348) [Sat, 25 Apr 2026 22:01:49] modprobe: FATAL: Module ip_tables not found in directory /run/booted-system/kernel-modules/lib/modules/7.0.0
+(14348) [Sat, 25 Apr 2026 22:01:49] iptables v1.8.12 (legacy): can't initialize iptables table `filter': Table does not exist (do you need to insmod?)
+(14348) [Sat, 25 Apr 2026 22:01:49] Perhaps iptables or your kernel needs to be upgraded.
+(14348) [Sat, 25 Apr 2026 22:01:49] modprobe: FATAL: Module ip_tables not found in directory /run/booted-system/kernel-modules/lib/modules/7.0.0
+(14348) [Sat, 25 Apr 2026 22:01:49] iptables v1.8.12 (legacy): can't initialize iptables table `nat': Table does not exist (do you need to insmod?)
+(14348) [Sat, 25 Apr 2026 22:01:49] Perhaps iptables or your kernel needs to be upgraded.
+(14348) [Sat, 25 Apr 2026 22:01:49] modprobe: FATAL: Module ip_tables not found in directory /run/booted-system/kernel-modules/lib/modules/7.0.0
+(14348) [Sat, 25 Apr 2026 22:01:49] iptables v1.8.12 (legacy): can't initialize iptables table `mangle': Table does not exist (do you need to insmod?)
+(14348) [Sat, 25 Apr 2026 22:01:49] Perhaps iptables or your kernel needs to be upgraded.
+(14348) [Sat, 25 Apr 2026 22:01:49] ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(14348) [Sat, 25 Apr 2026 22:01:49] NOTE: The failed command's output is above the ^^^ line in the log file: /var/lib/waydroid/waydroid.log
+(14348) [Sat, 25 Apr 2026 22:01:49] 
+Traceback (most recent call last):
+  File "/nix/store/dk2slla9b5gq5ngiv3887ilh7r0vj3js-waydroid-1.6.2/lib/waydroid/tools/helpers/logging.py", line 96, in wrapper
+    return func(*args, **kwargs)
+  File "/nix/store/dk2slla9b5gq5ngiv3887ilh7r0vj3js-waydroid-1.6.2/lib/waydroid/tools/actions/container_manager.py", line 33, in Start
+    do_start(self.args, session)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/dk2slla9b5gq5ngiv3887ilh7r0vj3js-waydroid-1.6.2/lib/waydroid/tools/actions/container_manager.py", line 167, in do_start
+    tools.helpers.run.user(args, command)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/nix/store/dk2slla9b5gq5ngiv3887ilh7r0vj3js-waydroid-1.6.2/lib/waydroid/tools/helpers/run.py", line 58, in user
+    return tools.helpers.run_core.core(args, msg, cmd, working_dir, output,
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                     output_return, check, sudo)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/dk2slla9b5gq5ngiv3887ilh7r0vj3js-waydroid-1.6.2/lib/waydroid/tools/helpers/run_core.py", line 351, in core
+    check_return_code(args, code, log_message)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/dk2slla9b5gq5ngiv3887ilh7r0vj3js-waydroid-1.6.2/lib/waydroid/tools/helpers/run_core.py", line 227, in check_return_code
+    raise RuntimeError("Command failed: " + log_message)
+RuntimeError: Command failed: % /nix/store/dk2slla9b5gq5ngiv3887ilh7r0vj3js-waydroid-1.6.2/lib/waydroid/data/scripts/waydroid-net.sh start

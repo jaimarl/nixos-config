@@ -18,6 +18,7 @@ config = lib.mkIf option.enable {
             confirm_os_window_close = 0;
             window_padding_width = 15;
             cursor_trail = 1;
+            cursor_shape = "beam";
         };
     };
 
