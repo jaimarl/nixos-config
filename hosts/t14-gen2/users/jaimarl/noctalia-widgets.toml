@@ -1,0 +1,185 @@
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [
+    "lockscreen-widget-0000000000000002",
+    "lockscreen-widget-000000000000000b",
+    "lockscreen-widget-0000000000000007",
+    "lockscreen-widget-0000000000000006",
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-widget-0000000000000003",
+    "lockscreen-widget-0000000000000004",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000005",
+    "lockscreen-widget-0000000000000008",
+    "lockscreen-widget-0000000000000009",
+    "lockscreen-widget-000000000000000a"
+]
+
+    [lockscreen_widgets.grid]
+    cell_size = 8
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 960.0
+    cy = 949.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 96.0
+    box_width = 96.0
+    cx = 1104.0
+    cy = 204.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = true
+        background_opacity = 0.0
+        clock_style = "analog"
+        color = "secondary"
+        font_family = "SF Mono"
+        format = "{:%H\\n%M}"
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    box_height = 256.0
+    box_width = 400.0
+    cx = 960.0
+    cy = 276.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+        background = true
+        background_opacity = 1.0
+        description = ""
+        shadow = true
+        title = ""
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
+    box_height = 96.0
+    box_width = 208.0
+    cx = 872.0
+    cy = 196.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "weather"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
+        background_opacity = 0.0
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000004]
+    box_height = 320.0
+    box_width = 304.0
+    cx = 1104.0
+    cy = 204.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "fancy_audio_visualizer"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000004.settings]
+        background = false
+        visualization_mode = "wave"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000005]
+    box_height = 160.0
+    box_width = 368.0
+    cx = 960.0
+    cy = 316.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "media_player"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000005.settings]
+        background = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000006]
+    box_height = 48.0
+    box_width = 400.0
+    cx = 960.0
+    cy = 116.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000006.settings]
+        background_opacity = 1.0
+        format = " {:%A, %e %B  •  %H:%M} "
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000007]
+    box_height = 192.0
+    box_width = 520.0
+    cx = 960.0
+    cy = 892.0
+    output = "eDP-1"
+    rotation = -0.0
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000007.settings]
+        background_opacity = 1.0
+        title = ""
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000008]
+    box_height = 96.0
+    box_width = 144.0
+    cx = 792.0
+    cy = 852.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "sysmon"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000008.settings]
+        background = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000009]
+    box_height = 96.0
+    box_width = 144.0
+    cx = 1128.0
+    cy = 852.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "sysmon"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000009.settings]
+        background = false
+        stat = "ram_pct"
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000000a]
+    box_height = 96.0
+    box_width = 144.0
+    cx = 960.0
+    cy = 852.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "sysmon"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000000a.settings]
+        background = false
+        stat = "cpu_temp"
+
+    [lockscreen_widgets.widget.lockscreen-widget-000000000000000b]
+    box_height = 144.0
+    box_width = 144.0
+    cx = 848.0
+    cy = 316.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "label"
+
+        [lockscreen_widgets.widget.lockscreen-widget-000000000000000b.settings]
+        background_color = "surface_variant"
+        background_radius = 6.0
+        color = "on_surface"
+        description = ""
+        shadow = false
+        title = ""

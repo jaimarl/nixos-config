@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ pkgs, ... }: {
 
     imports = [
         ./packages.nix
@@ -64,6 +64,130 @@
         settings.user.email = "jaimarl.me@gmail.com";
     };
 
-    programs.noctalia-shell.settings = lib.mkForce ./noctalia-config.json;
+    programs.noctalia.settings = {
+        wallpaper.transition_on_startup = true;
+        audio.enable_overdrive = true;
+        location.address = "Volgodonsk, Russia";
+
+        shell = {
+            middle_click_opens_widget_settings = false;
+            polkit_agent = true;
+            password_style = "random";
+            screen_time_enabled = true;
+
+            panel = {
+                open_near_click_control_center = true;
+                open_near_click_session = true;
+                open_near_click_wallpaper = true;
+                shadow = false;
+            };
+
+            session.actions = [
+                {
+                    action = "lock";
+                    enabled = true;
+                    shortcut = "1";
+                    variant = "default";
+                }
+                {
+                    action = "logout";
+                    enabled = true;
+                    shortcut = "2";
+                    variant = "default";
+                }
+                {
+                    action = "lock_and_suspend";
+                    enabled = true;
+                    glyph = "zzz";
+                    label = "Сон";
+                    shortcut = "3";
+                    variant = "default";
+                }
+                {
+                    action = "reboot";
+                    enabled = true;
+                    shortcut = "4";
+                    variant = "default";
+                }
+                {
+                    action = "shutdown";
+                    enabled = true;
+                    shortcut = "5";
+                    variant = "default";
+                }
+            ];
+        };
+
+        control_center = {
+            shortcuts = [
+                { type = "wifi"; }
+                { type = "bluetooth"; }
+                { type = "caffeine"; }
+                { type = "notification"; }
+            ];
+        };
+
+        notification = {
+            offset_x = 8;
+            offset_y = 8;
+        };
+
+        osd = {
+            offset_y = 8;
+            kinds.keyboard_layout = false;
+        };
+
+        lockscreen = {
+            blur_intensity = 0;
+            tint_intensity = 0;
+        };
+        lockscreen_widgets = {
+            enabled = true;
+        };
+
+        idle = {
+            behavior_order = [ "lock" "screen-off" "lock-and-suspend" ];
+            behavior.lock = {
+                action = "lock";
+                enabled = true;
+                timeout = 600;
+            };
+            behavior.screen-off = {
+                action = "screen_off";
+                enabled = true;
+                timeout = 660;
+            };
+            behavior.lock-and-suspend = {
+                action = "lock_and_suspend";
+                enabled = true;
+                timeout = 900;
+            };
+        };
+
+        bar.default = {
+            capsule = true;
+            margin_edge = 6;
+            radius = 10;
+            shadow = false;
+            center = [ "date" ];
+            end = [ "tray" "keyboard_layout" "input_volume" "output_volume" "session" ];
+            start = [ "control-center" "workspaces" "media" ];
+        };
+        
+        widget = {
+            control-center.glyph = "snowflake";
+            media = {
+                max_length = 180;
+                title_scroll = "always";
+            };
+            date.format = " {:%A, %e %B  •  %H:%M} ";
+            tray.drawer = true;
+            input_volume = {
+                scroll_step = 2;
+                show_label = false;
+            };
+            output_volume.scroll_step = 2;
+        };
+    };
 
 }
