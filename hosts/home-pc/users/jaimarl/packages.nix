@@ -2,21 +2,22 @@
 
     home.packages = with pkgs; [
         ripgrep
+        fd
         android-tools
         gowall
 
         qbittorrent
-        surge-dm
         telegram-desktop
         eog
         prismlauncher
-        heroic
 
+        # Yazi
         p7zip
         mediainfo
         trash-cli
         wl-clipboard
 
+        # Nvim
         neovim
         luajitPackages.luarocks_bootstrap
         tree-sitter
@@ -24,17 +25,17 @@
         lua-language-server
         vscode-langservers-extracted
         marksman
-
-        jdk17_headless
     ];
 
     programs = {
         fzf.enable = true;
+        zoxide.enable = true;
         eza.enable = true;
         bat.enable = true;
 
         btop.enable = true;
         yazi.enable = true;
+        obsidian.enable = true;
     };
 
 }

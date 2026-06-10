@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: let
+{ config, lib, ... }: let
     option = config.modules.system.steam;
 in {
 
@@ -15,7 +15,6 @@ config = lib.mkIf option.enable {
     programs.steam = {
         enable = true;
         protontricks.enable = true;
-        gamescopeSession.enable = true;
     };
 
 };}

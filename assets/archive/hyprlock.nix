@@ -1,10 +1,8 @@
 { config, osConfig, lib, pkgs, ... }: let
-    option = config.modules.home.desktop.hyprland;
+    option = config.modules.home.desktop.niri;
 
     colors = config.lib.stylix.colors;
     fonts = config.stylix.fonts;
-
-    monitor = lib.head (lib.splitString "," (lib.head option.monitors));
 
     c = lib.mapAttrs (name: value: "rgb(${value})") colors;
     spotify = pkgs.writeShellScript "spotify-now-playing" ''
@@ -13,7 +11,7 @@
 in {
 
 #--- [ Config ] -----------------------------------------------------
-config = { 
+config = lib.mkIf option.enable { 
     
     programs.hyprlock = {
         enable = true;
@@ -34,7 +32,7 @@ config = {
 
             label = [
                 { # Hours
-                    monitor = monitor;
+                    monitor = option.lockscreen.output;
                     font_family = "${pkgs.inter}/share/fonts/truetype/Inter.ttc Black";
                     text = "cmd[update:1000] echo \"$(date +\"%H\")\"";
                     font_size = 125;
@@ -42,7 +40,7 @@ config = {
                     color = c.base05;
                 }
                 { # Minutes
-                    monitor = monitor;
+                    monitor = option.lockscreen.output;
                     font_family = "${pkgs.inter}/share/fonts/truetype/Inter.ttc Black";
                     text = "cmd[update:1000] echo \"$(date +\"%M\")\"";
                     font_size = 125;
@@ -50,14 +48,14 @@ config = {
                     color = c.base0D;
                 }
                 { # Date
-                    monitor = monitor;
+                    monitor = option.lockscreen.output;
                     font_family = "${fonts.sansSerif.name} Bold";
                     text = "cmd[update:1000] echo -e \"$(date +\"%A, %d %B\")\"";
                     font_size = 15;
                     color = c.base05;
                 }
                 { # Spotify
-                    monitor = monitor;
+                    monitor = option.lockscreen.output;
                     font_family = "${fonts.sansSerif.name}";
                     text = "cmd[update:1000] ${spotify}";
                     font_size = 14;
@@ -67,7 +65,7 @@ config = {
                 }
             ] ++ lib.optionals (osConfig.host.system.hasBattery) [
                 { # Battery
-                    monitor = monitor;
+                    monitor = option.lockscreen.output;
                     font_family = "${fonts.sansSerif.name}";
                     text = "cmd[update:5000] echo \"$(status=$(cat /sys/class/power_supply/BAT0/status); cap=$(cat /sys/class/power_supply/BAT0/capacity); icons=('󰂎' '󰁺' '󰁻' '󰁼' '󰁽' '󰁾' '󰁿' '󰂀' '󰂁' '󰂂' '󰁹'); idx=$((cap / 9)); [ $idx -gt 10 ] && idx=10; if [ \"$status\" = 'Charging' ]; then icon='󰂄'; else icon=\${icons[$idx]}; fi; echo \"$cap%   $icon\")\"";
                     font_size = 14;
@@ -79,7 +77,7 @@ config = {
             ];
 
             input-field = [{ # Password
-                monitor = monitor;
+                monitor = option.lockscreen.output;
                 font_family = "${fonts.sansSerif.name}";
                 placeholder_text = "<span foreground=\"##${colors.base04}\">Пароль</span>";
                 size = "250, 50";

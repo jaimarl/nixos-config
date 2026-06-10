@@ -1,9 +1,9 @@
-{ config, lib, inputs, pkgs, stateVersion, ... }: let
+{ config, lib, pkgs, stateVersion, ... }: let
     hostOption = config.host.system;
-
     hmUsers = config.home-manager.users;
-    isHyprlandNeeded = lib.any 
-        (cfg: lib.attrByPath [ "wayland" "windowManager" "hyprland" "enable" ] false cfg) 
+
+    isNiriEnabled = lib.any 
+        (cfg: lib.attrByPath [ "modules" "home" "desktop" "niri" "enable" ] false cfg) 
         (builtins.attrValues hmUsers);
 in {
 
@@ -15,6 +15,7 @@ in {
     ];
 
 #--- [ Host Options ] -----------------------------------------------
+# DO NOT CHANGE VALUES, USE YOUR HOST CONFIG INSTEAD!
 options.host.system = {
     hostname = lib.mkOption { type = lib.types.str; default = "nixos"; };
     locale = lib.mkOption { type = lib.types.str; default = "ru_RU.UTF-8"; };
@@ -37,18 +38,12 @@ config = {
         packages = [ pkgs.terminus_font ];
     };
 
-    # Hyprland System
-    programs.hyprland = {
-        enable = isHyprlandNeeded;
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    programs.niri = {
+        enable = isNiriEnabled;
+        useNautilus = false;
     };
-
-    modules.system.boot.tuigreet = lib.mkIf isHyprlandNeeded { cmd = "start-hyprland"; };
 
 #--------------------------------------------------------------------
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     system.stateVersion = stateVersion;
-
-    nixpkgs.overlays = [ (import ../pkgs) ];
 };}

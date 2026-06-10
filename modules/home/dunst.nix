@@ -1,4 +1,4 @@
-{ config, osConfig, lib, pkgs, ... }: let
+{ config, lib, ... }: let
     option = config.modules.home.dunst;
 
     colors = config.lib.stylix.colors.withHashtag;

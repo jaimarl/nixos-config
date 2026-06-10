@@ -1,4 +1,9 @@
-{ config, lib, pkgs, stateVersion, ... }: {
+{ lib, ... }: {
+
+    imports = [
+        ./packages.nix
+        ./desktop-entries.nix
+    ];
 
     #--- Host Options ---------------------------
     host.home = {
@@ -12,37 +17,42 @@
     };
 
     modules.home = {
+        scripts = {
+            waysnap.enable = true;
+        };
         kitty.enable = true;
-        firefox.enable = true;
+        zenBrowser.enable = true;
         spotify.enable = true;
-        discord.enable = true;
-        dunst.enable = true;
-        desktop.hyprland = {
-            enable = true;
-            hypridle.enable = false;
+        desktop = {
+            niri = {
+                enable = true;
+                lockscreen.output = "eDP-1";
+                userConfig = ''
+                    output "eDP-1" {
+                        mode "1920x1080@60"
+                        scale 1
+                        hot-corners {
+                            off
+                        }
+                    }
 
-            monitors = [ "DP-3, 1920x1080@144, 0x0, 1" "HDMI-A-1, 1920x1080@60, 1920x0, 1" ];
-            record.codec = "h264_nvenc";
+                    binds {
+                        Mod+Return repeat=false { spawn "kitty"; }
+                        Mod+E repeat=false { spawn-sh "kitty zsh -ic 'y; exec zsh'"; }
+                        Mod+Grave repeat=false { spawn-sh "kitty nvim"; }
+                        Mod+B repeat=false { spawn-sh "zen-twilight"; }
+                        Mod+Shift+B repeat=false { spawn-sh "zen-twilight --private-window"; }
 
-            waybar.workspaceIcons = {
-                "9" = "󰝚";
+                        Mod+Shift+S repeat=false { spawn-sh "waysnap region"; }
+                        Mod+Shift+Alt+S repeat=false { spawn-sh "waysnap region -e"; }
+                        Mod+Ctrl+S repeat=false { spawn-sh "waysnap output"; }
+                        Mod+Ctrl+Alt+S repeat=false { spawn-sh "waysnap output -e"; }
+
+                        XF86AudioMute repeat=false allow-when-locked=true { spawn-sh "${pkgs.playerctl}/bin/playerctl -p spotify play-pause"; }
+                    }
+                '';
             };
-
-            extraConfig = {
-                general = {
-                    layout = "master";
-                };
-                windowrule = [
-                    "workspace 9, match:class (spotify)"
-                ];
-                bind = [
-                    ", XF86AudioMute, exec, ${pkgs.playerctl}/bin/playerctl -p spotify play-pause"
-                    "Super, Backslash, togglespecialworkspace, surge"
-                ];
-                exec-once = [
-                    "[workspace special:surge silent] kitty surge"
-                ];
-            };
+            noctalia.enable = true;
         };
     };
 
@@ -53,5 +63,7 @@
         settings.user.name = "jaimarl";
         settings.user.email = "jaimarl.me@gmail.com";
     };
+
+    programs.noctalia-shell.settings = lib.mkForce ./noctalia-config.json;
 
 }

@@ -2,6 +2,10 @@
     option = config.core.stylix;
 in {
 
+    imports = [
+        inputs.stylix.homeModules.stylix
+    ];
+
 #--- [ Options ] ----------------------------------------------------
 options.core.stylix = {
     flavor = lib.mkOption { type = lib.types.str; default = "macchiato"; };
@@ -65,6 +69,13 @@ config = {
             };
         };
 
+        icons = {
+            enable = true;
+            package = pkgs.colloid-icon-theme;
+            dark = "Colloid-Dark";
+            light = "Colloid-Light";
+        };
+
         targets.waybar.enable = false;
         targets.dunst.enable = false;
         targets.hyprlock.enable = false;
@@ -73,6 +84,8 @@ config = {
 
         targets.firefox.colorTheme.enable = true;
         targets.firefox.profileNames = [ "default" ];
+        
+        targets.zen-browser.profileNames = [ "default" ];
     };
 
 };}

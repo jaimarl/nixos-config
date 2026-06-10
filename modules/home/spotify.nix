@@ -4,6 +4,10 @@
     spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
 
+    imports = [
+        inputs.spicetify-nix.homeManagerModules.default 
+    ];
+
 #--- [ Options ] ----------------------------------------------------
 options.modules.home.spotify = {
     enable = lib.mkOption { type = lib.types.bool; default = false; };

@@ -1,12 +1,10 @@
-{ config, hmConfig, lib, pkgs, ... }: let
+{ config, lib, pkgs, ... }: let
     option = config.modules.system.boot.tuigreet;
 in {
 
 #--- [ Options ] ---------------------------------------------------- 
 options.modules.system.boot.tuigreet = {
     enable = lib.mkOption { type = lib.types.bool; default = false; };
-
-    cmd = lib.mkOption { type = lib.types.str; default = "bash"; };
 };
 
 
@@ -21,13 +19,11 @@ config = lib.mkIf option.enable {
         tuigreet
     ];
 
-    services.greetd = let
-        cmd = config.modules.system.boot.tuigreet.cmd;
-    in {
+    services.greetd = {
         enable = true;
         settings = {
             default_session = {
-                command = "${pkgs.tuigreet}/bin/tuigreet -r --time --time-format '%A, %d %B - %H:%M' --window-padding 1 --cmd ${cmd}";
+                command = "${pkgs.tuigreet}/bin/tuigreet -r --remember-user-session --time --time-format '%A, %d %B - %H:%M' --window-padding 1";
                 user = "greeter";
             };
         };

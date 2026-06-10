@@ -1,6 +1,6 @@
 { pkgs, stable, ... }: {
 
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_zen;
 
     environment.systemPackages = with pkgs; [
         nvtopPackages.amd 
@@ -8,7 +8,10 @@
     ];
 
     programs = {
-        zsh.enable = true;
+        zsh = {
+            enable = true;
+            enableGlobalCompInit = false;
+        };
         starship.enable = true;
     };
 

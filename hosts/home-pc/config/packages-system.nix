@@ -7,7 +7,10 @@
     ];
 
     programs = {
-        zsh.enable = true;
+        zsh = {
+            enable = true;
+            enableGlobalCompInit = false;
+        };
         starship.enable = true;
     };
 

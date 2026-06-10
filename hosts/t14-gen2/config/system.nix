@@ -1,6 +1,4 @@
-{ config, hmConfig, lib, pkgs, ... }: let
-    hostOption = config.host.system;
-in {
+{ config, ... }: {
     
     imports = [
         ../hardware.nix
@@ -26,10 +24,6 @@ config = {
     modules.system = {
         steam.enable = true;
         virtualisation.enable = true;
-        zapret = {
-            enable = true;
-            strategy = "general(ALT)";
-        };
         hardware = {
             wifi.enable = true;
             bluetooth.enable = true;

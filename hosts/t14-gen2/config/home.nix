@@ -1,4 +1,4 @@
-{ config, osConfig, lib, pkgs, stateVersion, ... }: {
+{ config, ... }: {
 
     imports = [
         ./packages-home.nix

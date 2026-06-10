@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{
      
 #--- [ Config ] -----------------------------------------------------
 config = {
@@ -7,7 +7,10 @@ config = {
         enable = true;
         settings = {
             logo = {
-                source = ../../assets/fastfetch-logo.txt;
+                source = toString (builtins.fetchurl {
+                    url = "https://codeberg.org/permafrozen/ascii/raw/commit/1513bbc9a9e91ea3e9f70a88a27de9722bed3cf8/src/nixos_logo.txt";
+                    sha256 = "sha256:0n5kg0bcd87gnsp0a0fls8v3zgbj5p582259bpl121rfb4fwggcj";
+                });
             };
             display = {
                 separator = "  󰁔  ";
@@ -35,7 +38,7 @@ config = {
                 {
                     type = "wm";
                     key = "󱂬";
-                    format = "{pretty-name} {#2}[{version}]";
+                    format = "{pretty-name} {#2}[{protocol-name} {version}]";
                 }
                 {
                     type = "shell";
@@ -61,13 +64,13 @@ config = {
                 {
                     type = "uptime";
                     key = "󰥔";
-                    format = "{days} days, {hours} hours, {minutes} minutes";
+                    format = "Uptime {days} days, {hours} hours, {minutes} minutes";
                 }
                 {
                     type = "disk";
                     key = "󰃭";
                     folser = "/";
-                    format = "{create-time:10} {#2}[{days} days]";
+                    format = "Installed {create-time:10} {#2}[{days} days ago]";
                 }
             ];
         };

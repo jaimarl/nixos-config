@@ -8,34 +8,37 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        hyprland.url = "github:hyprwm/Hyprland/v0.54.3";
-        hyprsplit = {
-            url = "github:shezdy/hyprsplit";
-            inputs.hyprland.follows = "hyprland";
+        noctalia = {
+            url = "github:noctalia-dev/noctalia-shell";
+            inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        nixcord.url = "github:FlameFlag/nixcord";
-
-        stylix.url = "github:nix-community/stylix";
         spicetify-nix = {
             url = "github:Gerg-L/spicetify-nix";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        nixcord.url = "github:FlameFlag/nixcord";
+
+        zen-browser = {
+            url = "github:0xc000022070/zen-browser-flake";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        stylix.url = "github:nix-community/stylix";
         apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
 
         zapret-discord-youtube.url = "github:kartavkun/zapret-discord-youtube";
     };
 
-    outputs = { nixpkgs, nixpkgs-stable, home-manager, nixcord, stylix, spicetify-nix, apple-fonts, zapret-discord-youtube, ... } @ inputs:
+    outputs = { nixpkgs, nixpkgs-stable, ... } @ inputs:
         let
             hostsDir = ./hosts;
             hostDirs = builtins.attrNames (
                 nixpkgs.lib.filterAttrs (n: v: v == "directory" && n != ".template") (builtins.readDir hostsDir)
             );
 
-            hosts = nixpkgs.lib.genAttrs hostDirs (host: {
-                stateVersion = import ./hosts/${host}/state-version.nix;
-            });
+            hosts = nixpkgs.lib.genAttrs hostDirs (host: import ./hosts/${host});
 
             mkHost = { host, stateVersion, system ? "x86_64-linux" }: let
                 pkgsCfg = ./hosts/${host}/config/packages-config.nix;
@@ -51,11 +54,7 @@
                         pkgsCfg 
                         ./common/home.nix
                         ./hosts/${host}/config/home.nix
-                        nixcord.homeModules.nixcord
-                        stylix.homeModules.stylix
-                        spicetify-nix.homeManagerModules.default 
                         ./hosts/${host}/users/${user}/home.nix
-                        ./hosts/${host}/users/${user}/packages.nix
                     ];
                     home.username = user;
                     home.homeDirectory = "/home/${user}";
@@ -75,9 +74,8 @@
                     pkgsCfg 
                     ./common/system.nix
                     ./hosts/${host}/config/system.nix
-                    zapret-discord-youtube.nixosModules.default
                     
-                    home-manager.nixosModules.home-manager {
+                    inputs.home-manager.nixosModules.home-manager {
                         home-manager.extraSpecialArgs = { inherit inputs stable host stateVersion users; };
                         home-manager.users = hmUsers;
                     }
@@ -87,7 +85,7 @@
         nixosConfigurations = nixpkgs.lib.mapAttrs (hostname: params:
             mkHost {
                 host = hostname;
-                inherit (params) stateVersion;
+                inherit (params) stateVersion system;
             }
         ) hosts;
     };

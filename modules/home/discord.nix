@@ -1,7 +1,11 @@
-{ config, lib, ... }: let
+{ inputs, config, lib, ... }: let
     option = config.modules.home.discord;
     stylix = config.core.stylix;
 in {
+
+    imports = [
+        inputs.nixcord.homeModules.nixcord
+    ];
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.home.discord = {

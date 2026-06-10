@@ -1,21 +1,25 @@
 { pkgs, ... }: {
 
-    services.v2raya = {
-        enable = true;
-        cliPackage = pkgs.xray;
-    };
+    services = {
+        v2raya = {
+            enable = true;
+            cliPackage = pkgs.xray;
+        };
 
-    services.logind.settings.Login = {
-        HandlePowerKey = "ignore";
-    };
+        upower.enable = true;
 
-    services.keyd = {
-        enable = true;
-        keyboards = {
-            default = {
-                settings = {
-                    main = {
-                        sysrq = "layer(meta)";
+        logind.settings.Login = {
+            HandlePowerKey = "ignore";
+        };
+
+        keyd = {
+            enable = true;
+            keyboards = {
+                default = {
+                    settings = {
+                        main = {
+                            sysrq = "layer(meta)";
+                        };
                     };
                 };
             };
