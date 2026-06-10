@@ -1,6 +1,16 @@
 let
     appsToHide = [
-
+        "btop"
+        "nvim"
+        "nixos-manual"
+        "nvtop"
+        "protontricks"
+        "v2raya"
+        "yazi"
+        "qt5ct"
+        "qt6ct"
+        "kvantummanager"
+        "org.gnome.eog"
     ];
 in {
 

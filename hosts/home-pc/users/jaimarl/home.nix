@@ -23,13 +23,23 @@
         kitty.enable = true;
         zenBrowser.enable = true;
         spotify.enable = true;
+        discord.enable = true;
         desktop = {
             niri = {
                 enable = true;
                 lockscreen.output = "eDP-1";
                 userConfig = ''
-                    output "eDP-1" {
+                    output "DP-3" {
+                        mode "1920x1080@144"
+                        position x=0 y=0
+                        scale 1
+                        hot-corners {
+                            off
+                        }
+                    }
+                    output "HDMI-A-1" {
                         mode "1920x1080@60"
+                        position x=1920 y=0
                         scale 1
                         hot-corners {
                             off
@@ -137,30 +147,13 @@
             kinds.keyboard_layout = false;
         };
 
-        lockscreen = {
-            blur_intensity = 0;
-            tint_intensity = 0;
-        };
-        lockscreen_widgets = {
-            enabled = true;
-        };
-
         idle = {
-            behavior_order = [ "lock" "screen-off" "lock-and-suspend" ];
+            behavior_order = [ "lock" ];
+            pre_action_fade_seconds = 0;
             behavior.lock = {
                 action = "lock";
                 enabled = true;
                 timeout = 600;
-            };
-            behavior.screen-off = {
-                action = "screen_off";
-                enabled = true;
-                timeout = 660;
-            };
-            behavior.lock-and-suspend = {
-                action = "lock_and_suspend";
-                enabled = true;
-                timeout = 900;
             };
         };
 
