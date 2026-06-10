@@ -83,9 +83,11 @@ config = {
             spicetify.enable = false;
             nixcord.enable = false;
 
-            firefox.colorTheme.enable = true;
-            firefox.profileNames = [ "default" ];
-            
+            firefox = {
+                profileNames = [ "default" ];
+                colorTheme.enable = true;
+            };
+
             zen-browser.profileNames = [ "default" ];
         };
     };

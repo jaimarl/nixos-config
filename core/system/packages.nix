@@ -1,8 +1,7 @@
-{ pkgs, stable, ... }: {
+{ pkgs, ... }: {
 
     environment.systemPackages = with pkgs; [
         git
-        tree
         neovim
         btop
     ];

@@ -1,7 +1,10 @@
 {
     imports = [
+        ./scripts/waysnap.nix
+
         ./desktop/niri
         ./desktop/noctalia.nix
+
         ./discord.nix
         ./firefox.nix
         ./kitty.nix

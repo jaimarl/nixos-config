@@ -1,7 +1,7 @@
 { config, ... }: {
 
     imports = [
-        ./packages-home.nix
+        ./packages.nix
     ];
     
 config = {

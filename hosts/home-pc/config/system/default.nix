@@ -1,8 +1,8 @@
 { config, ... }: {
     
     imports = [
-        ../hardware.nix
-        ./packages-system.nix
+        ../../hardware.nix
+        ./packages.nix
         ./services.nix
     ];
 
@@ -10,8 +10,7 @@ config = {
 
     #--- Host Options ---------------------------
     host.system = {
-        hostname = "nix-btw";
-        hasBattery = true;
+        hostname = "nix-home";
     };
 
 
@@ -19,15 +18,12 @@ config = {
     core = {
         bootloader.useGrub = true;
         audio.monoPlayback.enable = true;
+        graphics.nvidia.enable = true;
     };
 
     modules.system = {
         steam.enable = true;
-        virtualisation.enable = true;
-        hardware = {
-            wifi.enable = true;
-            bluetooth.enable = true;
-        };
+        hardware.wifi.enable = true;
         boot = {
             tuigreet.enable = true;
             swap.enable = true;
