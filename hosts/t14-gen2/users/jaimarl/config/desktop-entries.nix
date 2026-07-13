@@ -11,6 +11,7 @@ let
         "nvtop"
         "protontricks"
         "v2raya"
+        "syncthing-ui"
     ];
 in {
 

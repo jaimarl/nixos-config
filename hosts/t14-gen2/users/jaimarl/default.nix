@@ -23,6 +23,7 @@
         kitty.enable = true;
         zenBrowser.enable = true;
         spotify.enable = true;
+        discord.enable = true;
         desktop = {
             niri = {
                 enable = true;
@@ -70,6 +71,20 @@
         settings.user.email = "jaimarl.me@gmail.com";
     };
 
+    services.syncthing = {
+        enable = true;
+        settings = {
+            devices = {
+                "Pixel 8 Pro" = { id = "2SAK7XX-O236DZ6-RTZQCD6-HN4WKO4-K7UX5QE-SXXAG74-OUEPV5O-SCLHGAZ"; };
+            };
+            folders = {
+                "Vault" = {
+                    path = "~/Vaults/Personal";
+                    devices = [ "Pixel 8 Pro" ];
+                };
+            };
+        };
+    };
     
     xdg.configFile."noctalia/lockscreen-widgets.toml".source = ./config/noctalia-widgets.toml;
     programs.noctalia.settings = {
@@ -192,5 +207,4 @@
             battery.display_mode = "graphic";
         };
     };
-
 }

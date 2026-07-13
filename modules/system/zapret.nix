@@ -2,9 +2,7 @@
     option = config.modules.system.zapret;
 in {
 
-    imports = [
-        inputs.zapret-discord-youtube.nixosModules.default
-    ];
+    imports = [ inputs.zapret-discord-youtube.nixosModules.default ];
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.system.zapret = {

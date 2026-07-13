@@ -2,9 +2,7 @@
     option = config.modules.home.zenBrowser;
 in {
 
-    imports = [
-        inputs.zen-browser.homeModules.twilight
-    ];
+    imports = [ inputs.zen-browser.homeModules.twilight ];
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.home.zenBrowser = {

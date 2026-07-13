@@ -3,9 +3,7 @@
     stylix = config.core.stylix;
 in {
 
-    imports = [
-        inputs.nixcord.homeModules.nixcord
-    ];
+    imports = [ inputs.nixcord.homeModules.nixcord ];
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.home.discord = {

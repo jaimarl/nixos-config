@@ -4,9 +4,7 @@
     niri = config.modules.home.desktop.niri;
 in {
 
-    imports = [
-        inputs.noctalia.homeModules.default
-    ];
+    imports = [ inputs.noctalia.homeModules.default ];
 
 #--- [ Options ] ----------------------------------------------------
 options.modules.home.desktop.noctalia = {
